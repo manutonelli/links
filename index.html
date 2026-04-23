@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LinkPanel</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ══ PANEL UI VARIABLES (dark always) ══ */
+:root{
+  --bg:#0e0e0f; --surface:#18181b; --surface2:#222226;
+  --border:rgba(255,255,255,0.07); --border2:rgba(255,255,255,0.13);
+  --text:#f0f0f0; --muted:#666; --accent:#c8ff57; --accent-dk:#9acc30;
+  --danger:#ff5a5a; --r:14px; --rs:8px;
+  --font:'DM Sans',sans-serif; --mono:'DM Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;font-size:15px;line-height:1.6}
+input,select{font-family:var(--font);font-size:14px;background:var(--surface2);border:1px solid var(--border2);color:var(--text);border-radius:var(--rs);padding:9px 13px;width:100%;outline:none;transition:border .15s}
+input:focus,select:focus{border-color:var(--accent)}
+input::placeholder{color:var(--muted)}
+select option{background:#1a1a1d}
+button{font-family:var(--font);cursor:pointer;border:none;outline:none}
+a{text-decoration:none;color:inherit}
+
+.view{display:none;min-height:100vh}
+.view.active{display:flex}
+
+/* ── LOGIN ── */
+#v-login{align-items:center;justify-content:center;padding:2rem}
+.lbox{width:100%;max-width:350px}
+.lp-logo{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2.2rem;display:flex;align-items:center;gap:8px}
+.lp-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.lbox h1{font-size:25px;font-weight:600;margin-bottom:.2rem}
+.lbox .sub{color:var(--muted);font-size:14px;margin-bottom:1.8rem}
+.fg{margin-bottom:.85rem}
+.fg label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;letter-spacing:.05em;text-transform:uppercase}
+.btn-p{width:100%;padding:12px;background:var(--accent);color:#111;font-weight:600;font-size:15px;border-radius:var(--rs);margin-top:.3rem;transition:background .15s}
+.btn-p:hover{background:var(--accent-dk)}
+.l-err{color:var(--danger);font-size:13px;margin-top:9px;display:none}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.75rem;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;width:100%}
+.t-brand{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+.t-dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.t-r{display:flex;align-items:center;gap:10px}
+.badge{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(200,255,87,.1);color:var(--accent);font-weight:500}
+.btn-out{font-size:13px;color:var(--muted);background:none;padding:6px 11px;border:1px solid var(--border2);border-radius:var(--rs)}
+.btn-out:hover{color:var(--text)}
+
+/* ── SUPERADMIN ── */
+#v-superadmin{flex-direction:column}
+.sa-wrap{padding:2rem;max-width:1000px;margin:0 auto;width:100%}
+.sa-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.sa-hdr h2{font-size:20px;font-weight:600}
+.btn-new{background:var(--accent);color:#111;font-weight:600;font-size:13px;padding:9px 16px;border-radius:var(--rs)}
+.btn-new:hover{background:var(--accent-dk)}
+.sa-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.cc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.2rem;transition:border .15s}
+.cc:hover{border-color:var(--border2)}
+.cc-top{display:flex;align-items:center;gap:11px;margin-bottom:12px}
+.cc-av{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;flex-shrink:0;overflow:hidden}
+.cc-av img{width:100%;height:100%;object-fit:contain;padding:4px}
+.cc-name{font-weight:600;font-size:14px}
+.cc-slug{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.cc-pills{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap}
+.pill{font-size:11px;padding:3px 9px;border-radius:20px;background:var(--surface2);color:var(--muted)}
+.cc-acts{display:flex;gap:7px;flex-wrap:wrap}
+.bs{font-size:12px;padding:6px 11px;border-radius:var(--rs);font-weight:500}
+.b-ed{background:var(--surface2);color:var(--text);border:1px solid var(--border2)}
+.b-ed:hover{border-color:var(--border2);color:var(--accent)}
+.b-br{background:rgba(200,255,87,.08);color:var(--accent);border:1px solid rgba(200,255,87,.2)}
+.b-br:hover{background:rgba(200,255,87,.15)}
+.b-vw{background:rgba(100,180,255,.08);color:#57aaff;border:1px solid rgba(100,180,255,.2)}
+.b-vw:hover{background:rgba(100,180,255,.15)}
+.b-dl{background:rgba(255,90,90,.07);color:var(--danger);border:1px solid rgba(255,90,90,.15)}
+.b-dl:hover{background:rgba(255,90,90,.14)}
+
+/* ── OVERLAY / MODAL ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:none;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px)}
+.overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:1.75rem;width:100%;max-width:520px;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:17px;font-weight:600;margin-bottom:1.25rem}
+.m2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.mfg{margin-bottom:.85rem}
+.mfg label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
+.m-acts{display:flex;gap:9px;margin-top:1.25rem;justify-content:flex-end}
+.btn-cancel{background:var(--surface2);color:var(--muted);font-size:13px;padding:8px 15px;border-radius:var(--rs)}
+.btn-cancel:hover{color:var(--text)}
+.btn-sv{background:var(--accent);color:#111;font-weight:600;font-size:13px;padding:8px 16px;border-radius:var(--rs)}
+.btn-sv:hover{background:var(--accent-dk)}
+.sep{height:1px;background:var(--border);margin:.9rem 0}
+.modal-sec{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem}
+
+/* logo upload */
+.logo-up{border:1px dashed var(--border2);border-radius:var(--rs);padding:14px;text-align:center;cursor:pointer;transition:border .15s;position:relative}
+.logo-up:hover{border-color:var(--accent)}
+.logo-up input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.logo-up .ph{font-size:13px;color:var(--muted)}
+.logo-up img{max-height:48px;max-width:100%;object-fit:contain}
+
+/* color pickers */
+.cp-row{display:flex;align-items:center;gap:10px}
+.cp-row input[type=color]{width:36px;height:36px;padding:2px;border-radius:var(--rs);cursor:pointer;border:1px solid var(--border2);flex-shrink:0}
+.cp-row span{font-size:13px;color:var(--muted)}
+
+/* font select */
+.font-preview{margin-top:6px;font-size:16px;color:var(--muted);padding:6px 0}
+
+/* ── BRAND MODAL ── */
+#modal-brand .modal{max-width:540px}
+
+/* ── CLIENT ADMIN ── */
+#v-client{flex-direction:column}
+.ca-layout{display:grid;grid-template-columns:1fr 360px;flex:1;min-height:0}
+@media(max-width:720px){.ca-layout{grid-template-columns:1fr}}
+.ca-ed{padding:1.75rem;overflow-y:auto;border-right:1px solid var(--border)}
+.ca-pv{overflow-y:auto;background:var(--surface);display:flex;flex-direction:column}
+.sec-lbl{font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.07em;text-transform:uppercase;margin-bottom:9px}
+.lrow{background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:10px 12px;display:flex;align-items:center;gap:9px;margin-bottom:7px;cursor:grab}
+.lrow:active{cursor:grabbing;opacity:.6}
+.dh{color:var(--muted);font-size:17px;line-height:1;flex-shrink:0;user-select:none}
+.lf{flex:1;display:flex;flex-direction:column;gap:5px}
+.lf input{padding:7px 10px;font-size:13px}
+.ldel{background:none;color:var(--muted);font-size:16px;line-height:1;padding:3px;flex-shrink:0}
+.ldel:hover{color:var(--danger)}
+.btn-add{width:100%;padding:10px;background:none;border:1px dashed var(--border2);border-radius:var(--rs);color:var(--muted);font-size:13px;margin-top:4px;transition:border .15s,color .15s}
+.btn-add:hover{border-color:var(--accent);color:var(--accent)}
+
+/* theme toggle inside client panel */
+.theme-toggle-row{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;margin-bottom:1.2rem}
+.theme-toggle-row span{font-size:13px;color:var(--text)}
+.toggle-btns{display:flex;gap:6px}
+.t-btn{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid var(--border2);color:var(--muted);background:none;transition:all .15s}
+.t-btn.on{background:var(--accent);color:#111;border-color:var(--accent);font-weight:600}
+
+.save-bar{background:var(--surface);border-top:1px solid var(--border);padding:.85rem 1.75rem;display:flex;align-items:center;justify-content:space-between;width:100%;flex-shrink:0}
+.save-ok{font-size:13px;color:var(--accent)}
+.btn-sv2{background:var(--accent);color:#111;font-weight:600;font-size:14px;padding:9px 22px;border-radius:var(--rs)}
+.btn-sv2:hover{background:var(--accent-dk)}
+
+/* preview pane inside client admin */
+.pv-top{padding:1rem 1.5rem .5rem;border-bottom:1px solid var(--border);flex-shrink:0}
+.pv-body{flex:1;overflow-y:auto;padding:1.5rem}
+.pv-phone{border-radius:var(--r);overflow:hidden}
+
+/* ── PUBLIC PAGE ── */
+#v-public{flex-direction:column;align-items:stretch;justify-content:stretch;padding:0;min-height:100vh}
+.pub-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:2.5rem 1.5rem;transition:background .3s,color .3s}
+.pub-card{max-width:420px;width:100%;display:flex;flex-direction:column;align-items:center;gap:.9rem}
+.pub-logo-wrap{width:90px;height:90px;border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.pub-logo-wrap img{width:100%;height:100%;object-fit:contain}
+.pub-logo-fallback{width:90px;height:90px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700}
+.pub-name{font-size:20px;font-weight:700;text-align:center}
+.pub-bio{font-size:14px;text-align:center;opacity:.65}
+.pub-links{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:.4rem}
+.pub-a{display:block;width:100%;padding:15px 20px;border-radius:13px;text-align:center;font-size:15px;font-weight:600;transition:transform .12s,opacity .15s;cursor:pointer}
+.pub-a:hover{transform:translateY(-2px);opacity:.88}
+.pub-foot{text-align:center;padding:.75rem;font-size:11px;opacity:.3;font-family:var(--mono)}
+.pub-back{position:fixed;top:1rem;right:1rem;z-index:10;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.15);border-radius:var(--rs);padding:6px 12px;font-size:12px;color:#fff;backdrop-filter:blur(8px);cursor:pointer}
+.pub-back:hover{background:rgba(0,0,0,.55)}
+
+/* 404 */
+#v-404{align-items:center;justify-content:center;flex-direction:column;gap:.5rem}
+#v-404 h2{font-size:52px;font-weight:600;color:var(--muted)}
+#v-404 p{color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══ -->
+<div class="view" id="v-login">
+  <div class="lbox">
+    <div class="lp-logo"><span class="lp-dot"></span>LinkPanel</div>
+    <h1>Bienvenido</h1>
+    <p class="sub">Ingresá tus credenciales para continuar</p>
+    <div class="fg"><label>Usuario</label><input id="l-u" placeholder="usuario" autocomplete="username"></div>
+    <div class="fg"><label>Contraseña</label><input id="l-p" type="password" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="btn-p" onclick="doLogin()">Ingresar</button>
+    <div class="l-err" id="l-err">Usuario o contraseña incorrectos</div>
+  </div>
+</div>
+
+<!-- ══ SUPERADMIN ══ -->
+<div class="view" id="v-superadmin">
+  <div class="topbar">
+    <div class="t-brand"><span class="t-dot"></span>LinkPanel</div>
+    <div class="t-r"><span class="badge">Super Admin</span><button class="btn-out" onclick="logout()">Salir</button></div>
+  </div>
+  <div class="sa-wrap">
+    <div class="sa-hdr"><h2>Clientes</h2><button class="btn-new" onclick="openNew()">+ Nuevo cliente</button></div>
+    <div class="sa-grid" id="sa-grid"></div>
+  </div>
+</div>
+
+<!-- ══ CLIENT ADMIN ══ -->
+<div class="view" id="v-client">
+  <div class="topbar">
+    <div class="t-brand"><span class="t-dot"></span>LinkPanel</div>
+    <div class="t-r"><span class="badge" id="ca-badge">Cliente</span><button class="btn-out" onclick="logout()">Salir</button></div>
+  </div>
+  <div class="ca-layout">
+    <div class="ca-ed">
+
+      <!-- tema -->
+      <div class="theme-toggle-row">
+        <span>Tema de la página pública</span>
+        <div class="toggle-btns">
+          <button class="t-btn on" id="tbtn-dark" onclick="setTheme('dark')">● Oscuro</button>
+          <button class="t-btn" id="tbtn-light" onclick="setTheme('light')">○ Claro</button>
+        </div>
+      </div>
+
+      <!-- perfil -->
+      <div style="margin-bottom:1.4rem">
+        <div class="sec-lbl">Perfil</div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <input id="ca-name" placeholder="Nombre del área o empresa" oninput="renderPrev()">
+          <input id="ca-bio" placeholder="Descripción corta (opcional)" oninput="renderPrev()">
+        </div>
+      </div>
+
+      <!-- links -->
+      <div>
+        <div class="sec-lbl">Links</div>
+        <div id="ca-links"></div>
+        <button class="btn-add" onclick="addLink()">+ Agregar link</button>
+      </div>
+    </div>
+
+    <!-- preview -->
+    <div class="ca-pv">
+      <div class="pv-top"><div class="sec-lbl">Vista previa</div></div>
+      <div class="pv-body"><div id="ca-prev"></div></div>
+    </div>
+  </div>
+  <div class="save-bar">
+    <span class="save-ok" id="save-ok"></span>
+    <button class="btn-sv2" onclick="saveLinks()">Guardar cambios</button>
+  </div>
+</div>
+
+<!-- ══ PUBLIC ══ -->
+<div class="view" id="v-public">
+  <button class="pub-back" id="pub-back" style="display:none" onclick="history.back()">← Admin</button>
+  <div class="pub-wrap" id="pub-wrap">
+    <div class="pub-card" id="pub-card"></div>
+  </div>
+  <div class="pub-foot" id="pub-foot">linkpanel · ctrl studio</div>
+</div>
+
+<!-- ══ 404 ══ -->
+<div class="view" id="v-404">
+  <h2>404</h2><p>Esta página no existe</p>
+  <button class="btn-p" style="width:auto;padding:10px 22px;margin-top:1rem" onclick="showLogin()">Volver</button>
+</div>
+
+<!-- ══ MODAL: NUEVO / EDITAR CLIENTE ══ -->
+<div class="overlay" id="modal-client">
+  <div class="modal">
+    <h3 id="mc-title">Nuevo cliente</h3>
+    <div class="m2">
+      <div class="mfg"><label>Nombre / Área</label><input id="mc-name" placeholder="Ctrl Studio"></div>
+      <div class="mfg"><label>Slug URL</label><input id="mc-slug" placeholder="ctrl-studio" oninput="this.value=this.value.toLowerCase().replace(/[^a-z0-9-]/g,'-')"></div>
+    </div>
+    <div class="mfg"><label>Descripción</label><input id="mc-bio" placeholder="Todos nuestros canales"></div>
+    <div class="m2">
+      <div class="mfg"><label>Usuario</label><input id="mc-user" placeholder="ctrl"></div>
+      <div class="mfg"><label>Contraseña</label><input id="mc-pass" type="password" placeholder="••••••••"></div>
+    </div>
+    <div class="m-acts">
+      <button class="btn-cancel" onclick="closeModal('modal-client')">Cancelar</button>
+      <button class="btn-sv" onclick="saveClient()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ MODAL: BRAND KIT ══ -->
+<div class="overlay" id="modal-brand">
+  <div class="modal" style="max-width:540px">
+    <h3 id="mb-title">Brand Kit</h3>
+
+    <div class="modal-sec">Logo</div>
+    <div class="logo-up" id="logo-drop">
+      <input type="file" accept="image/*" onchange="onLogoFile(event)">
+      <div id="logo-ph"><div class="ph">📁 Subir logo (PNG, SVG, JPG)</div><div class="ph" style="font-size:11px;margin-top:4px">Se guarda como base64 en el navegador</div></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;margin-top:6px">
+      <button class="btn-cancel" style="font-size:12px;padding:5px 10px" onclick="clearLogo()">Quitar logo</button>
+    </div>
+
+    <div class="sep"></div>
+    <div class="modal-sec">Colores de marca</div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div class="cp-row">
+        <input type="color" id="mb-c1" value="#c8ff57" oninput="prevBrand()">
+        <div>
+          <div style="font-size:13px;font-weight:500">Color principal</div>
+          <div style="font-size:12px;color:var(--muted)">Fondo de los botones de links</div>
+        </div>
+      </div>
+      <div class="cp-row">
+        <input type="color" id="mb-c2" value="#111111" oninput="prevBrand()">
+        <div>
+          <div style="font-size:13px;font-weight:500">Texto sobre botones</div>
+          <div style="font-size:12px;color:var(--muted)">Color del texto en los links</div>
+        </div>
+      </div>
+      <div class="cp-row">
+        <input type="color" id="mb-c3" value="#1a1a1d" oninput="prevBrand()">
+        <div>
+          <div style="font-size:13px;font-weight:500">Fondo — tema oscuro</div>
+          <div style="font-size:12px;color:var(--muted)">Color de fondo de la página pública</div>
+        </div>
+      </div>
+      <div class="cp-row">
+        <input type="color" id="mb-c4" value="#f5f4f0" oninput="prevBrand()">
+        <div>
+          <div style="font-size:13px;font-weight:500">Fondo — tema claro</div>
+          <div style="font-size:12px;color:var(--muted)">Color de fondo en modo claro</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sep"></div>
+    <div class="modal-sec">Tipografía</div>
+    <div class="mfg">
+      <label>Fuente principal</label>
+      <select id="mb-font" onchange="prevBrand()">
+        <option value="'DM Sans', sans-serif">DM Sans (default)</option>
+        <option value="'Inter', sans-serif">Inter</option>
+        <option value="'Playfair Display', serif">Playfair Display</option>
+        <option value="'Space Grotesk', sans-serif">Space Grotesk</option>
+        <option value="'Syne', sans-serif">Syne</option>
+        <option value="'Bebas Neue', cursive">Bebas Neue</option>
+        <option value="'Raleway', sans-serif">Raleway</option>
+        <option value="'Outfit', sans-serif">Outfit</option>
+        <option value="'Libre Baskerville', serif">Libre Baskerville</option>
+        <option value="'Josefin Sans', sans-serif">Josefin Sans</option>
+      </select>
+      <div class="font-preview" id="font-prev">Texto de ejemplo · Links del área</div>
+    </div>
+
+    <!-- mini preview -->
+    <div class="sep"></div>
+    <div class="modal-sec">Preview rápido</div>
+    <div id="brand-mini-prev" style="border-radius:10px;overflow:hidden;border:1px solid var(--border)"></div>
+
+    <div class="m-acts">
+      <button class="btn-cancel" onclick="closeModal('modal-brand')">Cancelar</button>
+      <button class="btn-sv" onclick="saveBrand()">Guardar brand kit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// GOOGLE FONTS LOADER
+// ═══════════════════════════════════════════════
+const GF_MAP = {
+  "'Playfair Display', serif":  'Playfair+Display:wght@400;700',
+  "'Space Grotesk', sans-serif":'Space+Grotesk:wght@400;500;600',
+  "'Syne', sans-serif":         'Syne:wght@400;600;700',
+  "'Bebas Neue', cursive":      'Bebas+Neue',
+  "'Raleway', sans-serif":      'Raleway:wght@400;500;600',
+  "'Outfit', sans-serif":       'Outfit:wght@400;500;600',
+  "'Libre Baskerville', serif": 'Libre+Baskerville:wght@400;700',
+  "'Josefin Sans', sans-serif": 'Josefin+Sans:wght@400;600',
+  "'Inter', sans-serif":        'Inter:wght@400;500;600',
+};
+const loadedFonts = new Set();
+function loadFont(fontVal){
+  if(!GF_MAP[fontVal]||loadedFonts.has(fontVal)) return;
+  loadedFonts.add(fontVal);
+  const lk=document.createElement('link');
+  lk.rel='stylesheet';
+  lk.href=`https://fonts.googleapis.com/css2?family=${GF_MAP[fontVal]}&display=swap`;
+  document.head.appendChild(lk);
+}
+
+// ═══════════════════════════════════════════════
+// STORAGE
+// ═══════════════════════════════════════════════
+const SA = {u:'admin', p:'ctrl2024!'};
+const load = () => JSON.parse(localStorage.getItem('lp2')||'null');
+const save = d => localStorage.setItem('lp2', JSON.stringify(d));
+
+const DEFAULT_BRAND = {
+  logo: null,          // base64 string or null
+  c1: '#c8ff57',      // button bg
+  c2: '#111111',      // button text
+  c3: '#1a1a1d',      // dark bg
+  c4: '#f5f4f0',      // light bg
+  font: "'DM Sans', sans-serif",
+};
+
+function initDB(){
+  if(load()) return;
+  save({ clients:[
+    { id:uid(), slug:'ctrl-studio', name:'Ctrl Studio', bio:'Diseño & tecnología',
+      user:'ctrl', pass:'ctrl123', theme:'dark',
+      brand:{...DEFAULT_BRAND, c1:'#c8ff57', c2:'#111', c3:'#111213', c4:'#f0ede8'},
+      links:[
+        {id:uid(),label:'Instagram',url:'https://instagram.com'},
+        {id:uid(),label:'Behance',url:'https://behance.net'},
+        {id:uid(),label:'Sitio web',url:'https://ctrl.studio'},
+      ]},
+    { id:uid(), slug:'lex-growth', name:'Lex Growth', bio:'Consultoría legal & crecimiento',
+      user:'lex', pass:'lex123', theme:'light',
+      brand:{...DEFAULT_BRAND, c1:'#a78bfa', c2:'#fff', c3:'#1a1628', c4:'#f7f5ff'},
+      links:[
+        {id:uid(),label:'WhatsApp',url:'https://wa.me/'},
+        {id:uid(),label:'LinkedIn',url:'https://linkedin.com'},
+      ]},
+  ]});
+}
+
+function uid(){ return Math.random().toString(36).slice(2,8) }
+function esc(s){ return(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;') }
+function initials(n){ return n.split(' ').filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join('') }
+
+// ═══════════════════════════════════════════════
+// SESSION / ROUTING
+// ═══════════════════════════════════════════════
+let session = null;
+
+function doLogin(){
+  const u=document.getElementById('l-u').value.trim();
+  const p=document.getElementById('l-p').value;
+  document.getElementById('l-err').style.display='none';
+  if(u===SA.u&&p===SA.p){ session={role:'sa'}; showSA(); return; }
+  const db=load();
+  const c=db.clients.find(x=>x.user===u&&x.pass===p);
+  if(c){ session={role:'client',id:c.id}; showCA(c.id); return; }
+  document.getElementById('l-err').style.display='block';
+}
+function logout(){ session=null; document.getElementById('l-u').value=''; document.getElementById('l-p').value=''; showLogin(); }
+function sv(id){ document.querySelectorAll('.view').forEach(v=>v.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+function showLogin(){ sv('v-login'); location.hash=''; }
+
+function route(){
+  const h=location.hash.replace('#','').replace(/^\/*/, '');
+  if(!h||h==='admin'){ showLogin(); return; }
+  const db=load();
+  const c=db.clients.find(x=>x.slug===h);
+  if(c){ showPublic(c); return; }
+  sv('v-404');
+}
+window.addEventListener('hashchange', route);
+
+// ═══════════════════════════════════════════════
+// SUPERADMIN
+// ═══════════════════════════════════════════════
+function showSA(){ sv('v-superadmin'); renderSA(); }
+
+function renderSA(){
+  const db=load();
+  const g=document.getElementById('sa-grid');
+  if(!db.clients.length){ g.innerHTML='<p style="color:var(--muted);font-size:13px">No hay clientes aún.</p>'; return; }
+  g.innerHTML=db.clients.map(c=>{
+    const br=c.brand||DEFAULT_BRAND;
+    const avHtml=br.logo
+      ? `<img src="${br.logo}" alt="logo">`
+      : `<span style="font-size:14px;font-weight:700;color:${br.c2};background:${br.c1};width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-radius:10px">${initials(c.name)}</span>`;
+    return `<div class="cc">
+      <div class="cc-top">
+        <div class="cc-av" style="background:${br.c1}">${avHtml}</div>
+        <div><div class="cc-name">${esc(c.name)}</div><div class="cc-slug">/${esc(c.slug)}</div></div>
+      </div>
+      <div class="cc-pills">
+        <span class="pill">${c.links.length} links</span>
+        <span class="pill" style="background:${br.c1}22;color:${br.c1}">■ brand</span>
+        <span class="pill">${c.theme==='light'?'○ Claro':'● Oscuro'}</span>
+      </div>
+      <div class="cc-acts">
+        <button class="bs b-ed" onclick="openEdit('${c.id}')">Editar</button>
+        <button class="bs b-br" onclick="openBrand('${c.id}')">Brand Kit</button>
+        <button class="bs b-vw" onclick="location.hash='/${c.slug}'">Ver</button>
+        <button class="bs b-dl" onclick="delClient('${c.id}')">Eliminar</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════
+// MODAL CLIENTE (nombre, slug, user, pass)
+// ═══════════════════════════════════════════════
+let editId=null;
+
+function openNew(){
+  editId=null;
+  document.getElementById('mc-title').textContent='Nuevo cliente';
+  ['mc-name','mc-slug','mc-bio','mc-user','mc-pass'].forEach(id=>document.getElementById(id).value='');
+  openModal('modal-client');
+}
+function openEdit(id){
+  const db=load(); const c=db.clients.find(x=>x.id===id); if(!c)return;
+  editId=id;
+  document.getElementById('mc-title').textContent='Editar cliente';
+  document.getElementById('mc-name').value=c.name;
+  document.getElementById('mc-slug').value=c.slug;
+  document.getElementById('mc-bio').value=c.bio||'';
+  document.getElementById('mc-user').value=c.user;
+  document.getElementById('mc-pass').value=c.pass;
+  openModal('modal-client');
+}
+function saveClient(){
+  const name=document.getElementById('mc-name').value.trim();
+  const slug=document.getElementById('mc-slug').value.trim();
+  const bio=document.getElementById('mc-bio').value.trim();
+  const user=document.getElementById('mc-user').value.trim();
+  const pass=document.getElementById('mc-pass').value;
+  if(!name||!slug||!user||!pass){alert('Completá todos los campos.');return;}
+  const db=load();
+  if(editId){
+    const i=db.clients.findIndex(c=>c.id===editId);
+    db.clients[i]={...db.clients[i],name,slug,bio,user,pass};
+  } else {
+    if(db.clients.find(c=>c.slug===slug||c.user===user)){alert('Slug o usuario ya existe.');return;}
+    db.clients.push({id:uid(),slug,name,bio,user,pass,theme:'dark',brand:{...DEFAULT_BRAND},links:[]});
+  }
+  save(db); closeModal('modal-client'); renderSA();
+}
+function delClient(id){
+  if(!confirm('¿Eliminar este cliente?'))return;
+  const db=load(); db.clients=db.clients.filter(c=>c.id!==id); save(db); renderSA();
+}
+
+// ═══════════════════════════════════════════════
+// BRAND KIT MODAL
+// ═══════════════════════════════════════════════
+let brandEditId=null;
+let tempLogo=null; // base64 while editing
+
+function openBrand(id){
+  const db=load(); const c=db.clients.find(x=>x.id===id); if(!c)return;
+  brandEditId=id;
+  const br=c.brand||DEFAULT_BRAND;
+  tempLogo=br.logo||null;
+
+  document.getElementById('mb-title').textContent=`Brand Kit — ${c.name}`;
+  document.getElementById('mb-c1').value=br.c1;
+  document.getElementById('mb-c2').value=br.c2;
+  document.getElementById('mb-c3').value=br.c3;
+  document.getElementById('mb-c4').value=br.c4;
+  document.getElementById('mb-font').value=br.font;
+
+  updateLogoPh();
+  updateFontPrev();
+  loadFont(br.font);
+  prevBrand();
+  openModal('modal-brand');
+}
+
+function onLogoFile(e){
+  const file=e.target.files[0]; if(!file)return;
+  const reader=new FileReader();
+  reader.onload=ev=>{ tempLogo=ev.target.result; updateLogoPh(); prevBrand(); };
+  reader.readAsDataURL(file);
+}
+function clearLogo(){ tempLogo=null; updateLogoPh(); prevBrand(); }
+function updateLogoPh(){
+  const ph=document.getElementById('logo-ph');
+  if(tempLogo){
+    ph.innerHTML=`<img src="${tempLogo}" style="max-height:52px;max-width:100%;object-fit:contain;border-radius:6px">`;
+  } else {
+    ph.innerHTML=`<div class="ph">📁 Subir logo (PNG, SVG, JPG)</div><div class="ph" style="font-size:11px;margin-top:4px">Se guarda como base64</div>`;
+  }
+}
+function updateFontPrev(){
+  const f=document.getElementById('mb-font').value;
+  loadFont(f);
+  const fp=document.getElementById('font-prev');
+  fp.style.fontFamily=f;
+  fp.textContent='Texto de ejemplo · Links del área';
+}
+
+function prevBrand(){
+  updateFontPrev();
+  const c1=document.getElementById('mb-c1').value;
+  const c2=document.getElementById('mb-c2').value;
+  const c3=document.getElementById('mb-c3').value;
+  const c4=document.getElementById('mb-c4').value;
+  const font=document.getElementById('mb-font').value;
+
+  const db=load(); const cl=db.clients.find(x=>x.id===brandEditId); if(!cl)return;
+  const name=cl.name; const ini=initials(name);
+
+  const logoHtml=tempLogo
+    ? `<img src="${tempLogo}" style="width:60px;height:60px;object-fit:contain;border-radius:12px;padding:4px;background:${c1}">`
+    : `<div style="width:60px;height:60px;border-radius:12px;background:${c1};color:${c2};display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;font-family:${font}">${ini}</div>`;
+
+  const miniLink=(label)=>`<div style="padding:11px 16px;border-radius:10px;background:${c1};color:${c2};font-weight:600;font-size:13px;text-align:center;font-family:${font};margin-bottom:6px">${label}</div>`;
+
+  document.getElementById('brand-mini-prev').innerHTML=`
+    <div style="background:${c3};padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;border-radius:10px">
+      ${logoHtml}
+      <div style="font-weight:700;font-size:14px;color:#f0f0f0;font-family:${font}">${esc(name)}</div>
+      ${miniLink('Instagram')}
+      ${miniLink('Sitio web')}
+    </div>`;
+}
+
+function saveBrand(){
+  const db=load(); const i=db.clients.findIndex(c=>c.id===brandEditId); if(i<0)return;
+  db.clients[i].brand={
+    logo: tempLogo,
+    c1: document.getElementById('mb-c1').value,
+    c2: document.getElementById('mb-c2').value,
+    c3: document.getElementById('mb-c3').value,
+    c4: document.getElementById('mb-c4').value,
+    font: document.getElementById('mb-font').value,
+  };
+  save(db); closeModal('modal-brand'); renderSA();
+}
+
+// ═══════════════════════════════════════════════
+// CLIENT ADMIN
+// ═══════════════════════════════════════════════
+let cLinks=[];
+let cId=null;
+let cTheme='dark';
+
+function showCA(id){
+  const db=load(); const c=db.clients.find(x=>x.id===id); if(!c){showLogin();return;}
+  cId=id; cTheme=c.theme||'dark';
+  cLinks=c.links.map(l=>({...l}));
+  document.getElementById('ca-badge').textContent=c.name;
+  document.getElementById('ca-name').value=c.name;
+  document.getElementById('ca-bio').value=c.bio||'';
+  updateThemeBtns();
+  sv('v-client');
+  renderLinks(); renderPrev();
+}
+
+function setTheme(t){
+  cTheme=t; updateThemeBtns(); renderPrev();
+}
+function updateThemeBtns(){
+  document.getElementById('tbtn-dark').className='t-btn'+(cTheme==='dark'?' on':'');
+  document.getElementById('tbtn-light').className='t-btn'+(cTheme==='light'?' on':'');
+}
+
+function renderLinks(){
+  const wrap=document.getElementById('ca-links');
+  wrap.innerHTML=cLinks.map((l,i)=>`
+    <div class="lrow" draggable="true" data-i="${i}">
+      <span class="dh">⠿</span>
+      <div class="lf">
+        <input type="text" placeholder="Etiqueta (ej: Instagram)" value="${esc(l.label)}" oninput="upLink(${i},'label',this.value)">
+        <input type="url" placeholder="URL (https://...)" value="${esc(l.url)}" oninput="upLink(${i},'url',this.value)">
+      </div>
+      <button class="ldel" onclick="rmLink(${i})">✕</button>
+    </div>`).join('');
+
+  wrap.querySelectorAll('.lrow').forEach((el,i)=>{
+    el.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain',i);el.style.opacity='.4';});
+    el.addEventListener('dragend',()=>el.style.opacity='1');
+    el.addEventListener('dragover',e=>e.preventDefault());
+    el.addEventListener('drop',e=>{
+      const from=parseInt(e.dataTransfer.getData('text/plain'));
+      const to=parseInt(el.dataset.i);
+      if(from!==to){const mv=cLinks.splice(from,1)[0];cLinks.splice(to,0,mv);renderLinks();renderPrev();}
+    });
+  });
+}
+
+function upLink(i,f,v){cLinks[i][f]=v;renderPrev();}
+function rmLink(i){cLinks.splice(i,1);renderLinks();renderPrev();}
+function addLink(){
+  cLinks.push({id:uid(),label:'',url:''});
+  renderLinks();renderPrev();
+  const ins=document.querySelectorAll('.lf input');
+  if(ins.length)ins[ins.length-2].focus();
+}
+
+function renderPrev(){
+  const db=load(); const c=db.clients.find(x=>x.id===cId); if(!c)return;
+  const br=c.brand||DEFAULT_BRAND;
+  loadFont(br.font);
+
+  const name=document.getElementById('ca-name').value||c.name;
+  const bio=document.getElementById('ca-bio').value;
+  const bgColor=cTheme==='dark'?br.c3:br.c4;
+  const textColor=cTheme==='dark'?'#f0f0f0':'#111';
+
+  const logoHtml=br.logo
+    ? `<img src="${br.logo}" style="width:72px;height:72px;object-fit:contain;border-radius:14px;padding:4px;background:${br.c1}">`
+    : `<div style="width:72px;height:72px;border-radius:14px;background:${br.c1};color:${br.c2};display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;font-family:${br.font}">${initials(name)}</div>`;
+
+  const lh=cLinks.filter(l=>l.label).map(l=>
+    `<div style="padding:13px 18px;border-radius:11px;background:${br.c1};color:${br.c2};font-weight:600;font-size:13px;text-align:center;font-family:${br.font};margin-bottom:7px">${esc(l.label)}</div>`
+  ).join('');
+
+  document.getElementById('ca-prev').innerHTML=`
+    <div style="background:${bgColor};border-radius:12px;padding:24px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;transition:background .3s">
+      ${logoHtml}
+      <div style="font-weight:700;font-size:15px;color:${textColor};font-family:${br.font};text-align:center">${esc(name)}</div>
+      ${bio?`<div style="font-size:12px;color:${textColor};opacity:.55;text-align:center;font-family:${br.font}">${esc(bio)}</div>`:''}
+      <div style="width:100%;margin-top:4px">${lh||'<div style="color:#555;font-size:12px;text-align:center">Aún no hay links</div>'}</div>
+    </div>`;
+}
+
+function saveLinks(){
+  const db=load(); const i=db.clients.findIndex(c=>c.id===cId); if(i<0)return;
+  db.clients[i].links=cLinks.map(l=>({...l}));
+  db.clients[i].name=document.getElementById('ca-name').value||db.clients[i].name;
+  db.clients[i].bio=document.getElementById('ca-bio').value;
+  db.clients[i].theme=cTheme;
+  save(db);
+  const ok=document.getElementById('save-ok');
+  ok.textContent='✓ Cambios guardados';
+  setTimeout(()=>ok.textContent='',2800);
+}
+
+// ═══════════════════════════════════════════════
+// PUBLIC PAGE
+// ═══════════════════════════════════════════════
+function showPublic(c){
+  sv('v-public');
+  const br=c.brand||DEFAULT_BRAND;
+  const theme=c.theme||'dark';
+  loadFont(br.font);
+
+  const bgColor=theme==='dark'?br.c3:br.c4;
+  const textColor=theme==='dark'?'#f0f0f0':'#111';
+  const mutedColor=theme==='dark'?'rgba(240,240,240,.5)':'rgba(0,0,0,.45)';
+  const footColor=theme==='dark'?'rgba(255,255,255,.15)':'rgba(0,0,0,.2)';
+
+  const wrap=document.getElementById('pub-wrap');
+  const foot=document.getElementById('pub-foot');
+  wrap.style.background=bgColor;
+  wrap.style.minHeight='calc(100vh - 36px)';
+  foot.style.color=footColor;
+
+  const logoHtml=br.logo
+    ? `<div class="pub-logo-wrap" style="background:${br.c1}"><img src="${br.logo}" alt="${esc(c.name)}"></div>`
+    : `<div class="pub-logo-fallback" style="background:${br.c1};color:${br.c2};font-family:${br.font}">${initials(c.name)}</div>`;
+
+  const lh=c.links.filter(l=>l.label).map(l=>
+    `<a class="pub-a" href="${esc(l.url)}" target="_blank" rel="noopener"
+       style="background:${br.c1};color:${br.c2};font-family:${br.font}">${esc(l.label)}</a>`
+  ).join('');
+
+  document.getElementById('pub-card').innerHTML=`
+    ${logoHtml}
+    <div class="pub-name" style="color:${textColor};font-family:${br.font}">${esc(c.name)}</div>
+    ${c.bio?`<div class="pub-bio" style="color:${mutedColor};font-family:${br.font}">${esc(c.bio)}</div>`:''}
+    <div class="pub-links">${lh}</div>`;
+
+  document.getElementById('pub-back').style.display=session?'block':'none';
+}
+
+// ═══════════════════════════════════════════════
+// MODAL HELPERS
+// ═══════════════════════════════════════════════
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{ if(e.target===o)o.classList.remove('open'); }));
+
+// ═══════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════
+initDB();
+route();
+</script>
+</body>
+</html>
