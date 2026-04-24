@@ -24,13 +24,11 @@ button{font-family:var(--font);cursor:pointer;border:none;outline:none}
 .view{display:none;min-height:100vh}
 .view.active{display:flex}
 
-/* LOADING */
 #v-loading{align-items:center;justify-content:center;flex-direction:column;gap:12px}
 .spinner{width:32px;height:32px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .load-txt{font-size:13px;color:var(--muted)}
 
-/* LOGIN */
 #v-login{align-items:center;justify-content:center;padding:2rem}
 .lbox{width:100%;max-width:350px}
 .lp-logo{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;margin-bottom:2.2rem;display:flex;align-items:center;gap:8px}
@@ -44,7 +42,6 @@ button{font-family:var(--font);cursor:pointer;border:none;outline:none}
 .btn-p:disabled{opacity:.5;cursor:not-allowed}
 .l-err{color:var(--danger);font-size:13px;margin-top:9px;display:none}
 
-/* TOPBAR */
 .topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:0 1.75rem;height:54px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:20;width:100%}
 .t-brand{font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:7px}
 .t-dot{width:7px;height:7px;border-radius:50%;background:var(--accent)}
@@ -53,7 +50,6 @@ button{font-family:var(--font);cursor:pointer;border:none;outline:none}
 .btn-out{font-size:13px;color:var(--muted);background:none;padding:6px 11px;border:1px solid var(--border2);border-radius:var(--rs)}
 .btn-out:hover{color:var(--text)}
 
-/* SUPERADMIN */
 #v-superadmin{flex-direction:column}
 .sa-wrap{padding:2rem;max-width:1000px;margin:0 auto;width:100%}
 .sa-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
@@ -81,10 +77,9 @@ button{font-family:var(--font);cursor:pointer;border:none;outline:none}
 .b-dl{background:rgba(255,90,90,.07);color:var(--danger);border:1px solid rgba(255,90,90,.15)}
 .b-dl:hover{background:rgba(255,90,90,.14)}
 
-/* OVERLAY / MODAL */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;display:none;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(4px)}
 .overlay.open{display:flex}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:1.75rem;width:100%;max-width:520px;max-height:90vh;overflow-y:auto}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:1.75rem;width:100%;max-width:580px;max-height:90vh;overflow-y:auto}
 .modal h3{font-size:17px;font-weight:600;margin-bottom:1.25rem}
 .m2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
 .mfg{margin-bottom:.85rem}
@@ -97,18 +92,21 @@ button{font-family:var(--font);cursor:pointer;border:none;outline:none}
 .btn-sv:disabled{opacity:.5;cursor:not-allowed}
 .sep{height:1px;background:var(--border);margin:.9rem 0}
 .modal-sec{font-size:11px;font-weight:600;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.75rem}
-
 .logo-up{border:1px dashed var(--border2);border-radius:var(--rs);padding:14px;text-align:center;cursor:pointer;transition:border .15s;position:relative;overflow:hidden}
 .logo-up:hover{border-color:var(--accent)}
 .logo-up input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .logo-up .ph{font-size:13px;color:var(--muted)}
-.logo-up img{max-height:48px;max-width:100%;object-fit:contain}
-
 .cp-row{display:flex;align-items:center;gap:10px}
 .cp-row input[type=color]{width:36px;height:36px;padding:2px;border-radius:var(--rs);cursor:pointer;border:1px solid var(--border2);flex-shrink:0}
 .font-preview{margin-top:6px;font-size:16px;color:var(--muted);padding:6px 0}
+.tpl-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:6px}
+.tpl-card{border:1.5px solid var(--border2);border-radius:var(--rs);padding:8px 6px;cursor:pointer;transition:border .15s;text-align:center}
+.tpl-card:hover{border-color:var(--accent)}
+.tpl-card.on{border-color:var(--accent);background:rgba(200,255,87,.06)}
+.tpl-thumb{height:52px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:5px}
+.tpl-name{font-size:11px;font-weight:500;color:var(--text)}
+.tpl-desc{font-size:10px;color:var(--muted);margin-top:1px}
 
-/* CLIENT ADMIN */
 #v-client{flex-direction:column}
 .ca-layout{display:grid;grid-template-columns:1fr 360px;flex:1;min-height:0}
 @media(max-width:720px){.ca-layout{grid-template-columns:1fr}}
@@ -124,38 +122,82 @@ button{font-family:var(--font);cursor:pointer;border:none;outline:none}
 .ldel:hover{color:var(--danger)}
 .btn-add{width:100%;padding:10px;background:none;border:1px dashed var(--border2);border-radius:var(--rs);color:var(--muted);font-size:13px;margin-top:4px;transition:border .15s,color .15s}
 .btn-add:hover{border-color:var(--accent);color:var(--accent)}
-
 .theme-toggle-row{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:10px 14px;margin-bottom:1.2rem}
-.theme-toggle-row span{font-size:13px;color:var(--text)}
+.theme-toggle-row span{font-size:13px}
 .toggle-btns{display:flex;gap:6px}
 .t-btn{font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid var(--border2);color:var(--muted);background:none;transition:all .15s}
 .t-btn.on{background:var(--accent);color:#111;border-color:var(--accent);font-weight:600}
-
 .save-bar{background:var(--surface);border-top:1px solid var(--border);padding:.85rem 1.75rem;display:flex;align-items:center;justify-content:space-between;width:100%;flex-shrink:0}
 .save-ok{font-size:13px;color:var(--accent)}
 .btn-sv2{background:var(--accent);color:#111;font-weight:600;font-size:14px;padding:9px 22px;border-radius:var(--rs)}
 .btn-sv2:hover{background:var(--accent-dk)}
 .btn-sv2:disabled{opacity:.5;cursor:not-allowed}
-
 .pv-top{padding:1rem 1.5rem .5rem;border-bottom:1px solid var(--border);flex-shrink:0}
 .pv-body{flex:1;overflow-y:auto;padding:1.5rem}
 
-/* PUBLIC */
-#v-public{flex-direction:column;align-items:stretch;justify-content:stretch;padding:0;min-height:100vh}
-.pub-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:2.5rem 1.5rem;transition:background .3s}
-.pub-card{max-width:420px;width:100%;display:flex;flex-direction:column;align-items:center;gap:.9rem}
-.pub-logo-wrap{width:90px;height:90px;border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.pub-logo-wrap img{width:100%;height:100%;object-fit:contain}
-.pub-logo-fallback{width:90px;height:90px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700}
-.pub-name{font-size:20px;font-weight:700;text-align:center}
-.pub-bio{font-size:14px;text-align:center;opacity:.65}
-.pub-links{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:.4rem}
-.pub-a{display:block;width:100%;padding:15px 20px;border-radius:13px;text-align:center;font-size:15px;font-weight:600;transition:transform .12s,opacity .15s}
-.pub-a:hover{transform:translateY(-2px);opacity:.88}
-.pub-foot{text-align:center;padding:.75rem;font-size:11px;opacity:.3;font-family:var(--mono)}
-.pub-back{position:fixed;top:1rem;right:1rem;z-index:10;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.15);border-radius:var(--rs);padding:6px 12px;font-size:12px;color:#fff;backdrop-filter:blur(8px);cursor:pointer}
+#v-public{flex-direction:column;min-height:100vh}
+.pub-back{position:fixed;top:1rem;right:1rem;z-index:50;background:rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.18);border-radius:var(--rs);padding:7px 14px;font-size:12px;color:#fff;backdrop-filter:blur(10px);cursor:pointer;font-family:var(--font)}
+.pub-back:hover{background:rgba(0,0,0,.65)}
 
-/* 404 */
+.tpl1-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.5rem;position:relative;overflow:hidden}
+.tpl1-grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.tpl1-card{max-width:480px;width:100%;display:flex;flex-direction:column;align-items:center;gap:.55rem;position:relative;z-index:1}
+.tpl1-name{font-size:clamp(2.4rem,8vw,3.8rem);font-weight:700;text-align:center;line-height:1.05;letter-spacing:-.02em}
+.tpl1-tagline{font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.45;margin-top:.15rem}
+.tpl1-links{width:100%;display:flex;flex-direction:column;gap:9px;margin-top:.9rem}
+.tpl1-link{display:flex;align-items:center;padding:14px 18px;border-radius:12px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);font-size:15px;font-weight:500;transition:background .15s,transform .1s;text-decoration:none}
+.tpl1-link:hover{background:rgba(255,255,255,.09);transform:translateX(3px)}
+.tpl1-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;margin-right:14px;flex-shrink:0}
+.tpl1-label{flex:1;text-align:center}
+.tpl1-arrow{font-size:16px;opacity:.4}
+.tpl1-footer{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.2;margin-top:2rem;display:flex;align-items:center;gap:10px}
+.tpl1-footer::before,.tpl1-footer::after{content:'';flex:1;height:1px;background:currentColor;opacity:.4}
+
+.tpl2-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.5rem}
+.tpl2-card{max-width:400px;width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:.4rem}
+.tpl2-logo{border-radius:12px;overflow:hidden;margin-bottom:.5rem;display:flex;align-items:center;justify-content:center;font-weight:700}
+.tpl2-name{font-size:22px;font-weight:600;color:#111;letter-spacing:-.02em}
+.tpl2-bio{font-size:14px;color:#999;margin-bottom:.75rem}
+.tpl2-links{width:100%;border:1px solid #e5e5e3;border-radius:12px;overflow:hidden}
+.tpl2-link{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;font-size:14px;font-weight:500;color:#111;background:#fff;text-decoration:none;transition:background .15s}
+.tpl2-link:hover{background:#f7f7f5}
+.tpl2-link:not(:last-child){border-bottom:1px solid #e5e5e3}
+.tpl2-arrow{font-size:14px;color:#ccc}
+.tpl2-footer{font-size:11px;color:#ccc;margin-top:1.5rem;letter-spacing:.06em}
+
+.tpl3-wrap{min-height:100vh;display:flex;flex-direction:column}
+.tpl3-top{flex:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;padding:4rem 2.5rem 2rem}
+.tpl3-name{font-size:clamp(3rem,10vw,6.5rem);font-weight:700;line-height:.92;letter-spacing:-.04em;word-break:break-word}
+.tpl3-bio{font-size:16px;opacity:.45;margin-top:1rem;max-width:360px}
+.tpl3-bottom{padding:2rem 2.5rem 3rem}
+.tpl3-links{display:flex;flex-direction:column;gap:10px;max-width:500px}
+.tpl3-link{display:flex;align-items:center;justify-content:space-between;padding:17px 22px;border-radius:12px;font-size:15px;font-weight:600;text-decoration:none;transition:opacity .15s,transform .12s}
+.tpl3-link:hover{opacity:.85;transform:translateX(5px)}
+.tpl3-arrow{font-size:20px;opacity:.5}
+.tpl3-footer{font-size:11px;opacity:.18;margin-top:2rem;letter-spacing:.1em;text-transform:uppercase}
+
+.tpl4-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem 1.5rem;position:relative;overflow:hidden;background:#08060f}
+.tpl4-blob1{position:absolute;width:500px;height:500px;border-radius:50%;filter:blur(90px);opacity:.4;top:-150px;left:-150px;pointer-events:none}
+.tpl4-blob2{position:absolute;width:350px;height:350px;border-radius:50%;filter:blur(70px);opacity:.3;bottom:-100px;right:-100px;pointer-events:none}
+.tpl4-card{max-width:420px;width:100%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:24px;padding:2.5rem 2rem;backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;gap:.8rem;position:relative;z-index:1}
+.tpl4-logo{border-radius:18px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-weight:700;border:1px solid rgba(255,255,255,.15)}
+.tpl4-name{font-size:20px;font-weight:700;text-align:center;color:#fff}
+.tpl4-bio{font-size:13px;color:rgba(255,255,255,.45);text-align:center}
+.tpl4-links{width:100%;display:flex;flex-direction:column;gap:8px;margin-top:.5rem}
+.tpl4-link{display:block;padding:14px 18px;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);text-align:center;font-size:14px;font-weight:600;color:#fff;text-decoration:none;transition:background .15s,transform .12s}
+.tpl4-link:hover{background:rgba(255,255,255,.15);transform:translateY(-2px)}
+.tpl4-footer{font-size:11px;color:rgba(255,255,255,.18);letter-spacing:.08em}
+
+.tpl5-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:3rem 1.5rem}
+.tpl5-card{max-width:420px;width:100%;display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.tpl5-logo{border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-weight:700;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.3)}
+.tpl5-name{font-size:22px;font-weight:700;text-align:center;color:#fff}
+.tpl5-bio{font-size:14px;color:rgba(255,255,255,.65);text-align:center}
+.tpl5-links{width:100%;display:flex;flex-direction:column;gap:10px;margin-top:.75rem}
+.tpl5-link{display:block;padding:15px 20px;border-radius:14px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);text-align:center;font-size:15px;font-weight:600;color:#fff;text-decoration:none;transition:background .15s,transform .12s}
+.tpl5-link:hover{background:rgba(255,255,255,.25);transform:translateY(-2px)}
+.tpl5-footer{font-size:11px;color:rgba(255,255,255,.28);margin-top:1.5rem;letter-spacing:.1em;text-transform:uppercase}
+
 #v-404{align-items:center;justify-content:center;flex-direction:column;gap:.5rem}
 #v-404 h2{font-size:52px;font-weight:600;color:var(--muted)}
 #v-404 p{color:var(--muted);font-size:14px}
@@ -201,21 +243,21 @@ button{font-family:var(--font);cursor:pointer;border:none;outline:none}
       <div class="theme-toggle-row">
         <span>Tema de la página pública</span>
         <div class="toggle-btns">
-          <button class="t-btn on" id="tbtn-dark" onclick="setTheme('dark')">● Oscuro</button>
-          <button class="t-btn" id="tbtn-light" onclick="setTheme('light')">○ Claro</button>
+          <button class="t-btn on" id="tbtn-dark" onclick="window.__setTheme('dark')">● Oscuro</button>
+          <button class="t-btn" id="tbtn-light" onclick="window.__setTheme('light')">○ Claro</button>
         </div>
       </div>
       <div style="margin-bottom:1.4rem">
         <div class="sec-lbl">Perfil</div>
         <div style="display:flex;flex-direction:column;gap:7px">
-          <input id="ca-name" placeholder="Nombre del área o empresa" oninput="renderPrev()">
-          <input id="ca-bio" placeholder="Descripción corta (opcional)" oninput="renderPrev()">
+          <input id="ca-name" placeholder="Nombre del área o empresa" oninput="window.__renderPrev()">
+          <input id="ca-bio" placeholder="Descripción corta (opcional)" oninput="window.__renderPrev()">
         </div>
       </div>
       <div>
         <div class="sec-lbl">Links</div>
         <div id="ca-links"></div>
-        <button class="btn-add" onclick="addLink()">+ Agregar link</button>
+        <button class="btn-add" onclick="window.__addLink()">+ Agregar link</button>
       </div>
     </div>
     <div class="ca-pv">
@@ -225,21 +267,18 @@ button{font-family:var(--font);cursor:pointer;border:none;outline:none}
   </div>
   <div class="save-bar">
     <span class="save-ok" id="save-ok"></span>
-    <button class="btn-sv2" id="btn-save" onclick="saveLinks()">Guardar cambios</button>
+    <button class="btn-sv2" id="btn-save" onclick="window.__saveLinks()">Guardar cambios</button>
   </div>
 </div>
 
 <div class="view" id="v-public">
-  <button class="pub-back" id="pub-back" style="display:none" onclick="history.back()">← Admin</button>
-  <div class="pub-wrap" id="pub-wrap">
-    <div class="pub-card" id="pub-card"></div>
-  </div>
-  <div class="pub-foot">linkpanel · ctrl studio</div>
+  <button class="pub-back" id="pub-back" style="display:none" onclick="window.__goBack()">← Admin</button>
+  <div id="pub-content"></div>
 </div>
 
 <div class="view" id="v-404">
   <h2>404</h2><p>Esta página no existe</p>
-  <button class="btn-p" style="width:auto;padding:10px 22px;margin-top:1rem" onclick="showLogin()">Volver</button>
+  <button class="btn-p" style="width:auto;padding:10px 22px;margin-top:1rem" onclick="window.__showLogin()">Volver</button>
 </div>
 
 <!-- MODAL CLIENTE -->
@@ -256,53 +295,41 @@ button{font-family:var(--font);cursor:pointer;border:none;outline:none}
       <div class="mfg"><label>Contraseña</label><input id="mc-pass" type="password" placeholder="••••••••"></div>
     </div>
     <div class="m-acts">
-      <button class="btn-cancel" onclick="closeModal('modal-client')">Cancelar</button>
-      <button class="btn-sv" id="btn-save-client" onclick="saveClient()">Guardar</button>
+      <button class="btn-cancel" onclick="window.__closeModal('modal-client')">Cancelar</button>
+      <button class="btn-sv" id="btn-save-client" onclick="window.__saveClient()">Guardar</button>
     </div>
   </div>
 </div>
 
 <!-- MODAL BRAND KIT -->
 <div class="overlay" id="modal-brand">
-  <div class="modal" style="max-width:540px">
+  <div class="modal">
     <h3 id="mb-title">Brand Kit</h3>
-
+    <div class="modal-sec">Template de página pública</div>
+    <div class="tpl-grid" id="tpl-grid"></div>
+    <div class="sep"></div>
     <div class="modal-sec">Logo</div>
-    <div class="logo-up" id="logo-drop">
-      <input type="file" accept="image/*" onchange="onLogoFile(event)">
-      <div id="logo-ph"><div class="ph">Subir logo (PNG, SVG, JPG)</div><div class="ph" style="font-size:11px;margin-top:4px">Se guarda en Firebase Storage</div></div>
+    <div class="logo-up">
+      <input type="file" accept="image/*" onchange="window.__onLogoFile(event)">
+      <div id="logo-ph"><div class="ph">Subir logo (PNG, SVG, JPG)</div></div>
     </div>
     <div style="display:flex;justify-content:flex-end;margin-top:6px">
-      <button class="btn-cancel" style="font-size:12px;padding:5px 10px" onclick="clearLogo()">Quitar logo</button>
+      <button class="btn-cancel" style="font-size:12px;padding:5px 10px" onclick="window.__clearLogo()">Quitar logo</button>
     </div>
-
     <div class="sep"></div>
     <div class="modal-sec">Colores de marca</div>
     <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="cp-row">
-        <input type="color" id="mb-c1" value="#c8ff57" oninput="prevBrand()">
-        <div><div style="font-size:13px;font-weight:500">Color principal</div><div style="font-size:12px;color:var(--muted)">Fondo de los botones</div></div>
-      </div>
-      <div class="cp-row">
-        <input type="color" id="mb-c2" value="#111111" oninput="prevBrand()">
-        <div><div style="font-size:13px;font-weight:500">Texto sobre botones</div><div style="font-size:12px;color:var(--muted)">Color del texto en los links</div></div>
-      </div>
-      <div class="cp-row">
-        <input type="color" id="mb-c3" value="#1a1a1d" oninput="prevBrand()">
-        <div><div style="font-size:13px;font-weight:500">Fondo — tema oscuro</div><div style="font-size:12px;color:var(--muted)">Fondo de la página pública</div></div>
-      </div>
-      <div class="cp-row">
-        <input type="color" id="mb-c4" value="#f5f4f0" oninput="prevBrand()">
-        <div><div style="font-size:13px;font-weight:500">Fondo — tema claro</div><div style="font-size:12px;color:var(--muted)">Fondo en modo claro</div></div>
-      </div>
+      <div class="cp-row"><input type="color" id="mb-c1" value="#c8ff57" oninput="window.__prevBrand()"><div><div style="font-size:13px;font-weight:500">Color principal</div><div style="font-size:12px;color:var(--muted)">Acento y botones</div></div></div>
+      <div class="cp-row"><input type="color" id="mb-c2" value="#111111" oninput="window.__prevBrand()"><div><div style="font-size:13px;font-weight:500">Texto sobre color principal</div></div></div>
+      <div class="cp-row"><input type="color" id="mb-c3" value="#1a1a1d" oninput="window.__prevBrand()"><div><div style="font-size:13px;font-weight:500">Fondo oscuro</div></div></div>
+      <div class="cp-row"><input type="color" id="mb-c4" value="#f5f4f0" oninput="window.__prevBrand()"><div><div style="font-size:13px;font-weight:500">Fondo claro</div></div></div>
     </div>
-
     <div class="sep"></div>
     <div class="modal-sec">Tipografía</div>
     <div class="mfg">
       <label>Fuente principal</label>
-      <select id="mb-font" onchange="prevBrand()">
-        <option value="'DM Sans', sans-serif">DM Sans (default)</option>
+      <select id="mb-font" onchange="window.__prevBrand()">
+        <option value="'DM Sans', sans-serif">DM Sans</option>
         <option value="'Inter', sans-serif">Inter</option>
         <option value="'Playfair Display', serif">Playfair Display</option>
         <option value="'Space Grotesk', sans-serif">Space Grotesk</option>
@@ -315,331 +342,205 @@ button{font-family:var(--font);cursor:pointer;border:none;outline:none}
       </select>
       <div class="font-preview" id="font-prev">Texto de ejemplo · Links del área</div>
     </div>
-
     <div class="sep"></div>
     <div class="modal-sec">Preview rápido</div>
-    <div id="brand-mini-prev" style="border-radius:10px;overflow:hidden;border:1px solid var(--border)"></div>
-
+    <div id="brand-mini-prev" style="border-radius:10px;overflow:hidden;border:1px solid var(--border);min-height:80px"></div>
     <div class="m-acts">
-      <button class="btn-cancel" onclick="closeModal('modal-brand')">Cancelar</button>
-      <button class="btn-sv" id="btn-save-brand" onclick="saveBrand()">Guardar brand kit</button>
+      <button class="btn-cancel" onclick="window.__closeModal('modal-brand')">Cancelar</button>
+      <button class="btn-sv" id="btn-save-brand" onclick="window.__saveBrand()">Guardar brand kit</button>
     </div>
   </div>
 </div>
 
-<!-- FIREBASE SDK -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
-import { getFirestore, collection, doc, getDocs, getDoc, setDoc, updateDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+import { getFirestore, collection, doc, getDocs, getDoc, setDoc, deleteDoc, query, where } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
 
-// ══════════════════════════════════════════
-// CONFIG — tus credenciales de Firebase
-// ══════════════════════════════════════════
 const firebaseConfig = {
   apiKey: "AIzaSyAUu4XXygRgWqk9VhxrkgBQQ2MnY-5FM7c",
   authDomain: "linkpanel-dda01.firebaseapp.com",
   projectId: "linkpanel-dda01",
   storageBucket: "linkpanel-dda01.firebasestorage.app",
   messagingSenderId: "691272917957",
-  appId: "1:691272917957:web:d7f10cfac9a24fb65721ac",
-  measurementId: "G-882CNN13LM"
+  appId: "1:691272917957:web:d7f10cfac9a24fb65721ac"
 };
-
 const app = initializeApp(firebaseConfig);
 const db  = getFirestore(app);
 const COL = "clients";
 
-// ══════════════════════════════════════════
-// SUPERADMIN (credentials en código por ahora)
-// ══════════════════════════════════════════
-const SA = { u: "admin", p: "ctrl2024!" };
-
-// ══════════════════════════════════════════
-// HELPERS
-// ══════════════════════════════════════════
-const DEFAULT_BRAND = { logo:null, c1:"#c8ff57", c2:"#111111", c3:"#1a1a1d", c4:"#f5f4f0", font:"'DM Sans', sans-serif" };
+const SA = { u:"admin", p:"ctrl2024!" };
+const DEFAULT_BRAND = { logo:null, c1:"#c8ff57", c2:"#111111", c3:"#1a1a1d", c4:"#f5f4f0", font:"'DM Sans', sans-serif", template:"1" };
+const TEMPLATES = [
+  { id:"1", name:"Grid oscuro", desc:"Lex Growth", bg:"#111", emoji:"▦" },
+  { id:"2", name:"Minimalista", desc:"Claro", bg:"#f5f5f3", emoji:"☐" },
+  { id:"3", name:"Bold", desc:"Editorial", bg:"#0a0a0a", emoji:"𝐁" },
+  { id:"4", name:"Glass", desc:"Blur", bg:"#1a0a2e", emoji:"◈" },
+  { id:"5", name:"Gradiente", desc:"Color marca", bg:"#7c3aed", emoji:"◉" },
+];
 const GF_MAP = {
-  "'Playfair Display', serif":  "Playfair+Display:wght@400;700",
+  "'Playfair Display', serif":"Playfair+Display:wght@400;700",
   "'Space Grotesk', sans-serif":"Space+Grotesk:wght@400;500;600",
-  "'Syne', sans-serif":         "Syne:wght@400;600;700",
-  "'Bebas Neue', cursive":      "Bebas+Neue",
-  "'Raleway', sans-serif":      "Raleway:wght@400;500;600",
-  "'Outfit', sans-serif":       "Outfit:wght@400;500;600",
-  "'Libre Baskerville', serif": "Libre+Baskerville:wght@400;700",
-  "'Josefin Sans', sans-serif": "Josefin+Sans:wght@400;600",
-  "'Inter', sans-serif":        "Inter:wght@400;500;600",
+  "'Syne', sans-serif":"Syne:wght@400;600;700",
+  "'Bebas Neue', cursive":"Bebas+Neue",
+  "'Raleway', sans-serif":"Raleway:wght@400;500;600",
+  "'Outfit', sans-serif":"Outfit:wght@400;500;600",
+  "'Libre Baskerville', serif":"Libre+Baskerville:wght@400;700",
+  "'Josefin Sans', sans-serif":"Josefin+Sans:wght@400;600",
+  "'Inter', sans-serif":"Inter:wght@400;500;600",
 };
 const loadedFonts = new Set();
 function loadFont(f){ if(!GF_MAP[f]||loadedFonts.has(f))return; loadedFonts.add(f); const l=document.createElement("link"); l.rel="stylesheet"; l.href=`https://fonts.googleapis.com/css2?family=${GF_MAP[f]}&display=swap`; document.head.appendChild(l); }
 function uid(){ return Math.random().toString(36).slice(2,10) }
-function esc(s){ return (s||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;") }
+function esc(s){ return(s||"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;") }
 function initials(n){ return n.split(" ").filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join("") }
+
 function sv(id){ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active")); document.getElementById(id).classList.add("active"); }
-function showLogin(){ sv("v-login"); history.replaceState(null,"","#"); }
 
-// ══════════════════════════════════════════
-// FIRESTORE — CRUD
-// ══════════════════════════════════════════
-async function getAllClients(){
-  const snap = await getDocs(collection(db, COL));
-  return snap.docs.map(d => ({ id: d.id, ...d.data() }));
-}
-async function getClientBySlug(slug){
-  const q = query(collection(db, COL), where("slug","==",slug));
-  const snap = await getDocs(q);
-  if(snap.empty) return null;
-  return { id: snap.docs[0].id, ...snap.docs[0].data() };
-}
-async function getClientByCredentials(user, pass){
-  const q = query(collection(db, COL), where("user","==",user), where("pass","==",pass));
-  const snap = await getDocs(q);
-  if(snap.empty) return null;
-  return { id: snap.docs[0].id, ...snap.docs[0].data() };
-}
-async function saveClientDoc(id, data){
-  await setDoc(doc(db, COL, id), data, { merge: true });
-}
-async function deleteClientDoc(id){
-  await deleteDoc(doc(db, COL, id));
-}
-
-// ══════════════════════════════════════════
-// SESSION
-// ══════════════════════════════════════════
+// ── SESSION ──
 let session = null;
 
 async function doLogin(){
-  const u = document.getElementById("l-u").value.trim();
-  const p = document.getElementById("l-p").value;
-  const err = document.getElementById("l-err");
-  const btn = document.getElementById("btn-login");
-  err.style.display = "none";
-  btn.disabled = true; btn.textContent = "Ingresando...";
-
+  const u=document.getElementById("l-u").value.trim();
+  const p=document.getElementById("l-p").value;
+  const err=document.getElementById("l-err");
+  const btn=document.getElementById("btn-login");
+  err.style.display="none"; btn.disabled=true; btn.textContent="Ingresando...";
   try {
-    if(u === SA.u && p === SA.p){ session = {role:"sa"}; showSA(); return; }
-    const c = await getClientByCredentials(u, p);
-    if(c){ session = {role:"client", id:c.id}; showCA(c); return; }
-    err.style.display = "block";
-  } catch(e){ err.textContent = "Error de conexión. Revisá tu internet."; err.style.display="block"; }
+    if(u===SA.u&&p===SA.p){ session={role:"sa"}; showSA(); return; }
+    const c=await getClientByCredentials(u,p);
+    if(c){ session={role:"client",id:c.id}; showCA(c); return; }
+    err.style.display="block";
+  } catch(e){ err.textContent="Error de conexión."; err.style.display="block"; }
   finally{ btn.disabled=false; btn.textContent="Ingresar"; }
 }
-
 function logout(){ session=null; document.getElementById("l-u").value=""; document.getElementById("l-p").value=""; showLogin(); }
+function showLogin(){ sv("v-login"); history.replaceState(null,"","#"); }
 
-// ══════════════════════════════════════════
-// ROUTING
-// ══════════════════════════════════════════
+function goBack(){
+  if(!session){ showLogin(); return; }
+  if(session.role==="sa") showSA();
+  else showCA_byId(session.id);
+}
+
+// ── FIRESTORE ──
+async function getAllClients(){ const s=await getDocs(collection(db,COL)); return s.docs.map(d=>({id:d.id,...d.data()})); }
+async function getClientBySlug(slug){ const q=query(collection(db,COL),where("slug","==",slug)); const s=await getDocs(q); return s.empty?null:{id:s.docs[0].id,...s.docs[0].data()}; }
+async function getClientByCredentials(u,p){ const q=query(collection(db,COL),where("user","==",u),where("pass","==",p)); const s=await getDocs(q); return s.empty?null:{id:s.docs[0].id,...s.docs[0].data()}; }
+async function saveClientDoc(id,data){ await setDoc(doc(db,COL,id),data,{merge:true}); }
+async function deleteClientDoc(id){ await deleteDoc(doc(db,COL,id)); }
+
+// ── ROUTING ──
 async function route(){
   sv("v-loading");
-  const h = location.hash.replace("#","").replace(/^\//,"");
-  if(!h || h==="admin"){ sv("v-login"); return; }
-  try {
-    const c = await getClientBySlug(h);
-    if(c){ showPublic(c); return; }
-  } catch(e){}
+  const h=location.hash.replace("#","").replace(/^\//,"");
+  if(!h||h==="admin"){ sv("v-login"); return; }
+  try { const c=await getClientBySlug(h); if(c){ showPublic(c); return; } } catch(e){}
   sv("v-404");
 }
+window.addEventListener("hashchange",route);
 
-// ══════════════════════════════════════════
-// SUPERADMIN
-// ══════════════════════════════════════════
-async function showSA(){
-  sv("v-superadmin");
-  await renderSA();
-}
-
+// ── SUPERADMIN ──
+async function showSA(){ sv("v-superadmin"); await renderSA(); }
 async function renderSA(){
-  const g = document.getElementById("sa-grid");
-  g.innerHTML = `<div style="color:var(--muted);font-size:13px">Cargando...</div>`;
+  const g=document.getElementById("sa-grid");
+  g.innerHTML=`<div style="color:var(--muted);font-size:13px">Cargando...</div>`;
   try {
-    const clients = await getAllClients();
+    const clients=await getAllClients();
     if(!clients.length){ g.innerHTML=`<p style="color:var(--muted);font-size:13px">No hay clientes aún.</p>`; return; }
-    g.innerHTML = clients.map(c => {
-      const br = c.brand || DEFAULT_BRAND;
-      const avHtml = br.logo
-        ? `<img src="${br.logo}" alt="logo">`
-        : `<span style="font-size:14px;font-weight:700;color:${br.c2};background:${br.c1};width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-radius:10px">${initials(c.name)}</span>`;
+    g.innerHTML=clients.map(c=>{
+      const br=c.brand||DEFAULT_BRAND;
+      const tpl=TEMPLATES.find(t=>t.id===(br.template||"1"))||TEMPLATES[0];
+      const avHtml=br.logo?`<img src="${br.logo}" alt="">`:`<span style="font-size:14px;font-weight:700;color:${br.c2};background:${br.c1};width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-radius:10px">${initials(c.name)}</span>`;
       return `<div class="cc">
-        <div class="cc-top">
-          <div class="cc-av" style="background:${br.c1}">${avHtml}</div>
-          <div><div class="cc-name">${esc(c.name)}</div><div class="cc-slug">/${esc(c.slug)}</div></div>
-        </div>
-        <div class="cc-pills">
-          <span class="pill">${(c.links||[]).length} links</span>
-          <span class="pill" style="background:${br.c1}22;color:${br.c1}">■ brand</span>
-          <span class="pill">${c.theme==="light"?"○ Claro":"● Oscuro"}</span>
-        </div>
+        <div class="cc-top"><div class="cc-av" style="background:${br.c1}">${avHtml}</div><div><div class="cc-name">${esc(c.name)}</div><div class="cc-slug">/${esc(c.slug)}</div></div></div>
+        <div class="cc-pills"><span class="pill">${(c.links||[]).length} links</span><span class="pill">${tpl.name}</span><span class="pill">${c.theme==="light"?"○ Claro":"● Oscuro"}</span></div>
         <div class="cc-acts">
-          <button class="bs b-ed" onclick="openEdit('${c.id}')">Editar</button>
-          <button class="bs b-br" onclick="openBrand('${c.id}')">Brand Kit</button>
+          <button class="bs b-ed" onclick="window.__openEdit('${c.id}')">Editar</button>
+          <button class="bs b-br" onclick="window.__openBrand('${c.id}')">Brand Kit</button>
           <button class="bs b-vw" onclick="location.hash='/${c.slug}'">Ver</button>
-          <button class="bs b-dl" onclick="delClient('${c.id}')">Eliminar</button>
+          <button class="bs b-dl" onclick="window.__delClient('${c.id}')">Eliminar</button>
         </div>
       </div>`;
     }).join("");
   } catch(e){ g.innerHTML=`<p style="color:var(--danger);font-size:13px">Error al cargar. Revisá Firestore.</p>`; }
 }
 
-// ══════════════════════════════════════════
-// MODAL CLIENTE
-// ══════════════════════════════════════════
-let editId = null;
-
-function openNew(){
-  editId = null;
-  document.getElementById("mc-title").textContent = "Nuevo cliente";
-  ["mc-name","mc-slug","mc-bio","mc-user","mc-pass"].forEach(id=>document.getElementById(id).value="");
-  openModal("modal-client");
-}
-
-async function openEdit(id){
-  // fetch fresh from firestore
-  const snap = await getDoc(doc(db, COL, id));
-  if(!snap.exists()) return;
-  const c = snap.data();
-  editId = id;
-  document.getElementById("mc-title").textContent = "Editar cliente";
-  document.getElementById("mc-name").value = c.name;
-  document.getElementById("mc-slug").value = c.slug;
-  document.getElementById("mc-bio").value  = c.bio||"";
-  document.getElementById("mc-user").value = c.user;
-  document.getElementById("mc-pass").value = c.pass;
-  openModal("modal-client");
-}
-
+// ── MODAL CLIENTE ──
+let editId=null;
+function openNew(){ editId=null; document.getElementById("mc-title").textContent="Nuevo cliente"; ["mc-name","mc-slug","mc-bio","mc-user","mc-pass"].forEach(id=>document.getElementById(id).value=""); openModal("modal-client"); }
+async function openEdit(id){ const s=await getDoc(doc(db,COL,id)); if(!s.exists())return; const c=s.data(); editId=id; document.getElementById("mc-title").textContent="Editar cliente"; document.getElementById("mc-name").value=c.name; document.getElementById("mc-slug").value=c.slug; document.getElementById("mc-bio").value=c.bio||""; document.getElementById("mc-user").value=c.user; document.getElementById("mc-pass").value=c.pass; openModal("modal-client"); }
 async function saveClient(){
-  const name = document.getElementById("mc-name").value.trim();
-  const slug = document.getElementById("mc-slug").value.trim();
-  const bio  = document.getElementById("mc-bio").value.trim();
-  const user = document.getElementById("mc-user").value.trim();
-  const pass = document.getElementById("mc-pass").value;
-  if(!name||!slug||!user||!pass){ alert("Completá todos los campos."); return; }
-
-  const btn = document.getElementById("btn-save-client");
-  btn.disabled=true; btn.textContent="Guardando...";
+  const name=document.getElementById("mc-name").value.trim(),slug=document.getElementById("mc-slug").value.trim(),bio=document.getElementById("mc-bio").value.trim(),user=document.getElementById("mc-user").value.trim(),pass=document.getElementById("mc-pass").value;
+  if(!name||!slug||!user||!pass){alert("Completá todos los campos.");return;}
+  const btn=document.getElementById("btn-save-client"); btn.disabled=true; btn.textContent="Guardando...";
   try {
-    if(editId){
-      await saveClientDoc(editId, { name, slug, bio, user, pass });
-    } else {
-      // check slug uniqueness
-      const existing = await getClientBySlug(slug);
-      if(existing){ alert("Ese slug ya existe."); return; }
-      const id = uid();
-      await saveClientDoc(id, { name, slug, bio, user, pass, theme:"dark", brand:{...DEFAULT_BRAND}, links:[] });
-    }
-    closeModal("modal-client");
-    await renderSA();
-  } catch(e){ alert("Error al guardar: "+e.message); }
-  finally{ btn.disabled=false; btn.textContent="Guardar"; }
+    if(editId){ await saveClientDoc(editId,{name,slug,bio,user,pass}); }
+    else { const ex=await getClientBySlug(slug); if(ex){alert("Slug ya existe.");return;} await saveClientDoc(uid(),{name,slug,bio,user,pass,theme:"dark",brand:{...DEFAULT_BRAND},links:[]}); }
+    closeModal("modal-client"); await renderSA();
+  }catch(e){alert("Error: "+e.message);}
+  finally{btn.disabled=false;btn.textContent="Guardar";}
 }
+async function delClient(id){ if(!confirm("¿Eliminar este cliente?"))return; try{await deleteClientDoc(id);await renderSA();}catch(e){alert("Error: "+e.message);} }
 
-async function delClient(id){
-  if(!confirm("¿Eliminar este cliente?")) return;
-  try { await deleteClientDoc(id); await renderSA(); }
-  catch(e){ alert("Error: "+e.message); }
-}
-
-// ══════════════════════════════════════════
-// BRAND KIT
-// ══════════════════════════════════════════
-let brandEditId = null;
-let tempLogo = null;
-
-async function openBrand(id){
-  const snap = await getDoc(doc(db, COL, id));
-  if(!snap.exists()) return;
-  const c = snap.data();
-  brandEditId = id;
-  const br = c.brand || DEFAULT_BRAND;
-  tempLogo = br.logo || null;
-  document.getElementById("mb-title").textContent = `Brand Kit — ${c.name}`;
-  document.getElementById("mb-c1").value = br.c1;
-  document.getElementById("mb-c2").value = br.c2;
-  document.getElementById("mb-c3").value = br.c3;
-  document.getElementById("mb-c4").value = br.c4;
-  document.getElementById("mb-font").value = br.font;
-  updateLogoPh(); updateFontPrev(); loadFont(br.font); prevBrand();
-  openModal("modal-brand");
-}
-
-function onLogoFile(e){
-  const file=e.target.files[0]; if(!file)return;
-  const reader=new FileReader();
-  reader.onload=ev=>{ tempLogo=ev.target.result; updateLogoPh(); prevBrand(); };
-  reader.readAsDataURL(file);
-}
+// ── BRAND KIT ──
+let brandEditId=null, tempLogo=null, selTemplate="1", brandClientCache=null;
+function buildTplGrid(active){ document.getElementById("tpl-grid").innerHTML=TEMPLATES.map(t=>`<div class="tpl-card ${t.id===active?"on":""}" onclick="window.__pickTpl('${t.id}')"><div class="tpl-thumb" style="background:${t.bg};color:#fff">${t.emoji}</div><div class="tpl-name">${t.name}</div><div class="tpl-desc">${t.desc}</div></div>`).join(""); }
+function pickTpl(id){ selTemplate=id; document.querySelectorAll(".tpl-card").forEach(el=>{ el.classList.toggle("on",el.getAttribute("onclick")===`window.__pickTpl('${id}')`); }); prevBrand(); }
+async function openBrand(id){ const s=await getDoc(doc(db,COL,id)); if(!s.exists())return; const c=s.data(); brandEditId=id; brandClientCache=c; const br=c.brand||DEFAULT_BRAND; tempLogo=br.logo||null; selTemplate=br.template||"1"; document.getElementById("mb-title").textContent=`Brand Kit — ${c.name}`; document.getElementById("mb-c1").value=br.c1; document.getElementById("mb-c2").value=br.c2; document.getElementById("mb-c3").value=br.c3; document.getElementById("mb-c4").value=br.c4; document.getElementById("mb-font").value=br.font; buildTplGrid(selTemplate); updateLogoPh(); updateFontPrev(); loadFont(br.font); prevBrand(); openModal("modal-brand"); }
+function onLogoFile(e){ const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=ev=>{tempLogo=ev.target.result;updateLogoPh();prevBrand();}; r.readAsDataURL(f); }
 function clearLogo(){ tempLogo=null; updateLogoPh(); prevBrand(); }
-function updateLogoPh(){
-  const ph=document.getElementById("logo-ph");
-  if(tempLogo) ph.innerHTML=`<img src="${tempLogo}" style="max-height:52px;max-width:100%;object-fit:contain;border-radius:6px">`;
-  else ph.innerHTML=`<div class="ph">Subir logo (PNG, SVG, JPG)</div><div class="ph" style="font-size:11px;margin-top:4px">Se guarda en Firebase</div>`;
-}
-function updateFontPrev(){
-  const f=document.getElementById("mb-font").value;
-  loadFont(f);
-  const fp=document.getElementById("font-prev");
-  fp.style.fontFamily=f;
-  fp.textContent="Texto de ejemplo · Links del área";
-}
-async function prevBrand(){
-  updateFontPrev();
-  const c1=document.getElementById("mb-c1").value;
-  const c2=document.getElementById("mb-c2").value;
-  const c3=document.getElementById("mb-c3").value;
-  const font=document.getElementById("mb-font").value;
-  const snap = await getDoc(doc(db, COL, brandEditId));
-  if(!snap.exists()) return;
-  const cl=snap.data();
-  const ini=initials(cl.name);
-  const logoHtml=tempLogo
-    ? `<img src="${tempLogo}" style="width:60px;height:60px;object-fit:contain;border-radius:12px;padding:4px;background:${c1}">`
-    : `<div style="width:60px;height:60px;border-radius:12px;background:${c1};color:${c2};display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;font-family:${font}">${ini}</div>`;
-  const ml=(lbl)=>`<div style="padding:11px 16px;border-radius:10px;background:${c1};color:${c2};font-weight:600;font-size:13px;text-align:center;font-family:${font};margin-bottom:6px">${lbl}</div>`;
-  document.getElementById("brand-mini-prev").innerHTML=`
-    <div style="background:${c3};padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;border-radius:10px">
-      ${logoHtml}
-      <div style="font-weight:700;font-size:14px;color:#f0f0f0;font-family:${font}">${esc(cl.name)}</div>
-      ${ml("Instagram")}${ml("Sitio web")}
-    </div>`;
-}
-async function saveBrand(){
-  const btn=document.getElementById("btn-save-brand");
-  btn.disabled=true; btn.textContent="Guardando...";
-  try {
-    await saveClientDoc(brandEditId, { brand:{
-      logo:tempLogo,
-      c1:document.getElementById("mb-c1").value,
-      c2:document.getElementById("mb-c2").value,
-      c3:document.getElementById("mb-c3").value,
-      c4:document.getElementById("mb-c4").value,
-      font:document.getElementById("mb-font").value,
-    }});
-    closeModal("modal-brand"); await renderSA();
-  } catch(e){ alert("Error: "+e.message); }
-  finally{ btn.disabled=false; btn.textContent="Guardar brand kit"; }
-}
+function updateLogoPh(){ const ph=document.getElementById("logo-ph"); if(tempLogo)ph.innerHTML=`<img src="${tempLogo}" style="max-height:52px;max-width:100%;object-fit:contain;border-radius:6px">`; else ph.innerHTML=`<div class="ph">Subir logo (PNG, SVG, JPG)</div>`; }
+function updateFontPrev(){ const f=document.getElementById("mb-font").value; loadFont(f); const fp=document.getElementById("font-prev"); fp.style.fontFamily=f; fp.textContent="Texto de ejemplo · Links del área"; }
+function prevBrand(){ updateFontPrev(); if(!brandClientCache)return; const c1=document.getElementById("mb-c1").value,c2=document.getElementById("mb-c2").value,c3=document.getElementById("mb-c3").value,font=document.getElementById("mb-font").value; const ini=initials(brandClientCache.name); const logoHtml=tempLogo?`<img src="${tempLogo}" style="width:50px;height:50px;object-fit:contain;border-radius:10px;padding:3px;background:${c1}">`:`<div style="width:50px;height:50px;border-radius:10px;background:${c1};color:${c2};display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;font-family:${font}">${ini}</div>`; const ml=(lbl)=>`<div style="padding:9px 14px;border-radius:8px;background:${c1};color:${c2};font-weight:600;font-size:12px;text-align:center;font-family:${font};margin-bottom:5px">${lbl}</div>`; document.getElementById("brand-mini-prev").innerHTML=`<div style="background:${c3};padding:16px;display:flex;flex-direction:column;align-items:center;gap:8px;border-radius:10px">${logoHtml}<div style="font-weight:700;font-size:13px;color:#f0f0f0;font-family:${font}">${esc(brandClientCache.name)}</div>${ml("Instagram")}${ml("Sitio web")}</div>`; }
+async function saveBrand(){ const btn=document.getElementById("btn-save-brand"); btn.disabled=true; btn.textContent="Guardando..."; try{ await saveClientDoc(brandEditId,{brand:{logo:tempLogo,c1:document.getElementById("mb-c1").value,c2:document.getElementById("mb-c2").value,c3:document.getElementById("mb-c3").value,c4:document.getElementById("mb-c4").value,font:document.getElementById("mb-font").value,template:selTemplate}}); closeModal("modal-brand"); await renderSA(); }catch(e){alert("Error: "+e.message);} finally{btn.disabled=false;btn.textContent="Guardar brand kit";} }
 
-// ══════════════════════════════════════════
-// CLIENT ADMIN
-// ══════════════════════════════════════════
-let cLinks=[], cId=null, cTheme="dark";
+// ── CLIENT ADMIN ──
+let cLinks=[], cId=null, cTheme="dark", cClientCache=null;
+
+async function showCA_byId(id){ const s=await getDoc(doc(db,COL,id)); if(s.exists())showCA({id,...s.data()}); else showLogin(); }
 
 function showCA(c){
-  cId=c.id; cTheme=c.theme||"dark";
+  cId=c.id; cTheme=c.theme||"dark"; cClientCache=c;
   cLinks=(c.links||[]).map(l=>({...l}));
   document.getElementById("ca-badge").textContent=c.name;
   document.getElementById("ca-name").value=c.name;
   document.getElementById("ca-bio").value=c.bio||"";
-  updateThemeBtns();
-  sv("v-client");
-  renderLinks(); renderPrev(c);
+  updateThemeBtns(); sv("v-client"); renderLinks(); renderPrev();
 }
 
-function setTheme(t){ cTheme=t; updateThemeBtns(); renderPrevFromId(); }
+// FIX: setTheme actualiza cTheme y re-renderiza inmediatamente
+function setTheme(t){
+  cTheme=t;
+  updateThemeBtns();
+  renderPrev();
+}
+
 function updateThemeBtns(){
   document.getElementById("tbtn-dark").className="t-btn"+(cTheme==="dark"?" on":"");
   document.getElementById("tbtn-light").className="t-btn"+(cTheme==="light"?" on":"");
+}
+
+// renderPrev: usa cClientCache y cTheme directamente, sin Firestore
+function renderPrev(){
+  if(!cClientCache) return;
+  const br=cClientCache.brand||DEFAULT_BRAND;
+  loadFont(br.font);
+  const name=document.getElementById("ca-name").value||cClientCache.name;
+  const bio=document.getElementById("ca-bio").value;
+  // usa cTheme global directamente
+  const bgColor=cTheme==="dark"?br.c3:br.c4;
+  const textColor=cTheme==="dark"?"#f0f0f0":"#111";
+  const logoHtml=br.logo
+    ?`<img src="${br.logo}" style="width:64px;height:64px;object-fit:contain;border-radius:14px;padding:3px;background:${br.c1}">`
+    :`<div style="width:64px;height:64px;border-radius:14px;background:${br.c1};color:${br.c2};display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:700;font-family:${br.font}">${initials(name)}</div>`;
+  const lh=cLinks.filter(l=>l.label).map(l=>`<div style="padding:12px 16px;border-radius:10px;background:${br.c1};color:${br.c2};font-weight:600;font-size:13px;text-align:center;font-family:${br.font};margin-bottom:6px">${esc(l.label)}</div>`).join("");
+  document.getElementById("ca-prev").innerHTML=`
+    <div id="prev-inner" style="background:${bgColor};border-radius:12px;padding:22px 18px;display:flex;flex-direction:column;align-items:center;gap:9px">
+      ${logoHtml}
+      <div style="font-weight:700;font-size:14px;color:${textColor};font-family:${br.font};text-align:center">${esc(name)}</div>
+      ${bio?`<div style="font-size:12px;color:${textColor};opacity:.5;text-align:center;font-family:${br.font}">${esc(bio)}</div>`:""}
+      <div style="width:100%;margin-top:3px">${lh||`<div style="color:#555;font-size:12px;text-align:center">Sin links aún</div>`}</div>
+    </div>`;
 }
 
 function renderLinks(){
@@ -648,126 +549,109 @@ function renderLinks(){
     <div class="lrow" draggable="true" data-i="${i}">
       <span class="dh">⠿</span>
       <div class="lf">
-        <input type="text" placeholder="Etiqueta (ej: Instagram)" value="${esc(l.label)}" oninput="upLink(${i},'label',this.value)">
-        <input type="url" placeholder="URL (https://...)" value="${esc(l.url)}" oninput="upLink(${i},'url',this.value)">
+        <input type="text" placeholder="Etiqueta (ej: Instagram)" value="${esc(l.label)}" oninput="window.__upLink(${i},'label',this.value)">
+        <input type="url" placeholder="URL (https://...)" value="${esc(l.url)}" oninput="window.__upLink(${i},'url',this.value)">
       </div>
-      <button class="ldel" onclick="rmLink(${i})">✕</button>
+      <button class="ldel" onclick="window.__rmLink(${i})">✕</button>
     </div>`).join("");
   wrap.querySelectorAll(".lrow").forEach((el,i)=>{
     el.addEventListener("dragstart",e=>{e.dataTransfer.setData("text/plain",i);el.style.opacity=".4";});
     el.addEventListener("dragend",()=>el.style.opacity="1");
     el.addEventListener("dragover",e=>e.preventDefault());
-    el.addEventListener("drop",e=>{
-      const from=parseInt(e.dataTransfer.getData("text/plain"));
-      const to=parseInt(el.dataset.i);
-      if(from!==to){const mv=cLinks.splice(from,1)[0];cLinks.splice(to,0,mv);renderLinks();renderPrevFromId();}
-    });
+    el.addEventListener("drop",e=>{const from=parseInt(e.dataTransfer.getData("text/plain")),to=parseInt(el.dataset.i);if(from!==to){const mv=cLinks.splice(from,1)[0];cLinks.splice(to,0,mv);renderLinks();renderPrev();}});
   });
 }
-
-function upLink(i,f,v){cLinks[i][f]=v;renderPrevFromId();}
-function rmLink(i){cLinks.splice(i,1);renderLinks();renderPrevFromId();}
-function addLink(){
-  cLinks.push({id:uid(),label:"",url:""});
-  renderLinks();renderPrevFromId();
-  const ins=document.querySelectorAll(".lf input");
-  if(ins.length)ins[ins.length-2].focus();
-}
-
-async function renderPrevFromId(){
-  const snap=await getDoc(doc(db,COL,cId));
-  if(snap.exists()) renderPrev({id:cId,...snap.data()});
-}
-
-function renderPrev(c){
-  const br=c.brand||DEFAULT_BRAND;
-  loadFont(br.font);
-  const name=document.getElementById("ca-name").value||c.name;
-  const bio=document.getElementById("ca-bio").value;
-  const bgColor=cTheme==="dark"?br.c3:br.c4;
-  const textColor=cTheme==="dark"?"#f0f0f0":"#111";
-  const logoHtml=br.logo
-    ? `<img src="${br.logo}" style="width:72px;height:72px;object-fit:contain;border-radius:14px;padding:4px;background:${br.c1}">`
-    : `<div style="width:72px;height:72px;border-radius:14px;background:${br.c1};color:${br.c2};display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;font-family:${br.font}">${initials(name)}</div>`;
-  const lh=cLinks.filter(l=>l.label).map(l=>
-    `<div style="padding:13px 18px;border-radius:11px;background:${br.c1};color:${br.c2};font-weight:600;font-size:13px;text-align:center;font-family:${br.font};margin-bottom:7px">${esc(l.label)}</div>`
-  ).join("");
-  document.getElementById("ca-prev").innerHTML=`
-    <div style="background:${bgColor};border-radius:12px;padding:24px 20px;display:flex;flex-direction:column;align-items:center;gap:10px;transition:background .3s">
-      ${logoHtml}
-      <div style="font-weight:700;font-size:15px;color:${textColor};font-family:${br.font};text-align:center">${esc(name)}</div>
-      ${bio?`<div style="font-size:12px;color:${textColor};opacity:.55;text-align:center;font-family:${br.font}">${esc(bio)}</div>`:""}
-      <div style="width:100%;margin-top:4px">${lh||`<div style="color:#555;font-size:12px;text-align:center">Aún no hay links</div>`}</div>
-    </div>`;
-}
+function upLink(i,f,v){cLinks[i][f]=v;renderPrev();}
+function rmLink(i){cLinks.splice(i,1);renderLinks();renderPrev();}
+function addLink(){ cLinks.push({id:uid(),label:"",url:""}); renderLinks();renderPrev(); const ins=document.querySelectorAll(".lf input"); if(ins.length)ins[ins.length-2].focus(); }
 
 async function saveLinks(){
-  const btn=document.getElementById("btn-save");
-  btn.disabled=true; btn.textContent="Guardando...";
+  const btn=document.getElementById("btn-save"); btn.disabled=true; btn.textContent="Guardando...";
   try {
-    const snap=await getDoc(doc(db,COL,cId));
-    const c=snap.data();
-    await saveClientDoc(cId,{
-      links:cLinks.map(l=>({...l})),
-      name:document.getElementById("ca-name").value||c.name,
-      bio:document.getElementById("ca-bio").value,
-      theme:cTheme,
-    });
-    const ok=document.getElementById("save-ok");
-    ok.textContent="✓ Cambios guardados";
-    setTimeout(()=>ok.textContent="",2800);
-  } catch(e){ alert("Error al guardar: "+e.message); }
-  finally{ btn.disabled=false; btn.textContent="Guardar cambios"; }
+    const newName=document.getElementById("ca-name").value||cClientCache.name;
+    const newBio=document.getElementById("ca-bio").value;
+    await saveClientDoc(cId,{links:cLinks.map(l=>({...l})),name:newName,bio:newBio,theme:cTheme});
+    cClientCache={...cClientCache,name:newName,bio:newBio,theme:cTheme,links:cLinks.map(l=>({...l}))};
+    const ok=document.getElementById("save-ok"); ok.textContent="✓ Cambios guardados"; setTimeout(()=>ok.textContent="",2800);
+  }catch(e){alert("Error: "+e.message);}
+  finally{btn.disabled=false;btn.textContent="Guardar cambios";}
 }
 
-// ══════════════════════════════════════════
-// PUBLIC PAGE
-// ══════════════════════════════════════════
+// ── PUBLIC PAGE ──
 function showPublic(c){
   sv("v-public");
-  const br=c.brand||DEFAULT_BRAND;
-  const theme=c.theme||"dark";
-  loadFont(br.font);
-  const bgColor=theme==="dark"?br.c3:br.c4;
-  const textColor=theme==="dark"?"#f0f0f0":"#111";
-  const mutedColor=theme==="dark"?"rgba(240,240,240,.5)":"rgba(0,0,0,.45)";
-  document.getElementById("pub-wrap").style.background=bgColor;
-  const logoHtml=br.logo
-    ? `<div class="pub-logo-wrap" style="background:${br.c1}"><img src="${br.logo}" alt="${esc(c.name)}"></div>`
-    : `<div class="pub-logo-fallback" style="background:${br.c1};color:${br.c2};font-family:${br.font}">${initials(c.name)}</div>`;
-  const lh=(c.links||[]).filter(l=>l.label).map(l=>
-    `<a class="pub-a" href="${esc(l.url)}" target="_blank" rel="noopener" style="background:${br.c1};color:${br.c2};font-family:${br.font}">${esc(l.label)}</a>`
-  ).join("");
-  document.getElementById("pub-card").innerHTML=`
-    ${logoHtml}
-    <div class="pub-name" style="color:${textColor};font-family:${br.font}">${esc(c.name)}</div>
-    ${c.bio?`<div class="pub-bio" style="color:${mutedColor};font-family:${br.font}">${esc(c.bio)}</div>`:""}
-    <div class="pub-links">${lh}</div>`;
+  const br=c.brand||DEFAULT_BRAND; loadFont(br.font);
+  const links=(c.links||[]).filter(l=>l.label);
   document.getElementById("pub-back").style.display=session?"block":"none";
+  document.getElementById("pub-content").innerHTML=renderTemplate(br.template||"1",c,br,links,c.theme||"dark");
 }
 
-// ══════════════════════════════════════════
-// MODAL HELPERS
-// ══════════════════════════════════════════
+function linkIcon(label){ const l=(label||"").toLowerCase(); if(l.includes("instagram")||l.includes("ig"))return"◎"; if(l.includes("whatsapp")||l.includes("wsp"))return"◉"; if(l.includes("youtube")||l.includes("yt"))return"▶"; if(l.includes("tiktok"))return"♪"; if(l.includes("linkedin"))return"in"; if(l.includes("twitter")||l.includes("x.com"))return"✕"; if(l.includes("web")||l.includes("sitio"))return"⊕"; if(l.includes("email")||l.includes("mail"))return"✉"; if(l.includes("facebook")||l.includes("fb"))return"f"; return"→"; }
+
+function renderTemplate(tpl,c,br,links,theme){
+  const name=c.name||"", bio=c.bio||"", font=br.font||"'DM Sans',sans-serif";
+  const foot=name.toLowerCase().replace(/\s+/g,"")+".com";
+  const logoEl=(cls,size,rad)=>br.logo?`<div class="${cls}" style="width:${size}px;height:${size}px;border-radius:${rad}px;overflow:hidden"><img src="${br.logo}" style="width:100%;height:100%;object-fit:contain"></div>`:`<div class="${cls}" style="width:${size}px;height:${size}px;border-radius:${rad}px;background:${br.c1};color:${br.c2};display:flex;align-items:center;justify-content:center;font-size:${Math.round(size*.35)}px;font-weight:700;font-family:${font}">${initials(name)}</div>`;
+
+  if(tpl==="1"){
+    const bg=theme==="dark"?br.c3:"#0e0e0f";
+    const [w1,...rest]=name.split(" ");
+    const dn=rest.length?`${esc(w1)} <mark style="background:${br.c1};color:${br.c2};border-radius:6px;padding:0 10px">${esc(rest.join(" "))}</mark>`:`<mark style="background:${br.c1};color:${br.c2};border-radius:6px;padding:0 10px">${esc(w1)}</mark>`;
+    const lh=links.map(l=>`<a class="tpl1-link" href="${esc(l.url)}" target="_blank" rel="noopener" style="color:#f0f0f0;font-family:${font}"><div class="tpl1-icon" style="background:${br.c1}22;color:${br.c1}">${linkIcon(l.label)}</div><span class="tpl1-label">${esc(l.label)}</span><span class="tpl1-arrow">→</span></a>`).join("");
+    return `<div class="tpl1-wrap" style="background:${bg}"><div class="tpl1-grid-bg"></div><div class="tpl1-card"><div class="tpl1-name" style="color:#f0f0f0;font-family:${font}">${dn}</div>${bio?`<div class="tpl1-tagline" style="color:#f0f0f0;font-family:${font}">· ${esc(bio.toUpperCase())} ·</div>`:""}<div class="tpl1-links">${lh}</div><div class="tpl1-footer" style="color:#f0f0f0;font-family:${font}">${foot}</div></div></div>`;
+  }
+  if(tpl==="2"){
+    const bg=theme==="light"?br.c4:"#fafaf8";
+    const lh=links.map(l=>`<a class="tpl2-link" href="${esc(l.url)}" target="_blank" rel="noopener" style="font-family:${font}">${esc(l.label)}<span class="tpl2-arrow">→</span></a>`).join("");
+    return `<div class="tpl2-wrap" style="background:${bg}"><div class="tpl2-card">${logoEl("tpl2-logo",52,12)}<div class="tpl2-name" style="font-family:${font}">${esc(name)}</div>${bio?`<div class="tpl2-bio" style="font-family:${font}">${esc(bio)}</div>`:""}<div class="tpl2-links">${lh}</div><div class="tpl2-footer" style="font-family:${font}">${foot}</div></div></div>`;
+  }
+  if(tpl==="3"){
+    const bg=theme==="dark"?br.c3:"#0a0a0a";
+    const lh=links.map(l=>`<a class="tpl3-link" href="${esc(l.url)}" target="_blank" rel="noopener" style="background:${br.c1};color:${br.c2};font-family:${font}">${esc(l.label)}<span class="tpl3-arrow">→</span></a>`).join("");
+    return `<div class="tpl3-wrap" style="background:${bg}"><div class="tpl3-top"><div class="tpl3-name" style="color:#f0f0f0;font-family:${font}">${esc(name)}</div>${bio?`<div class="tpl3-bio" style="color:#f0f0f0;font-family:${font}">${esc(bio)}</div>`:""}</div><div class="tpl3-bottom"><div class="tpl3-links">${lh}</div><div class="tpl3-footer" style="color:#f0f0f0;font-family:${font}">${foot}</div></div></div>`;
+  }
+  if(tpl==="4"){
+    const lh=links.map(l=>`<a class="tpl4-link" href="${esc(l.url)}" target="_blank" rel="noopener" style="font-family:${font}">${esc(l.label)}</a>`).join("");
+    return `<div class="tpl4-wrap"><div class="tpl4-blob1" style="background:${br.c1}"></div><div class="tpl4-blob2" style="background:${br.c3}"></div><div class="tpl4-card">${logoEl("tpl4-logo",72,18)}<div class="tpl4-name" style="font-family:${font}">${esc(name)}</div>${bio?`<div class="tpl4-bio" style="font-family:${font}">${esc(bio)}</div>`:""}<div class="tpl4-links">${lh}</div><div class="tpl4-footer" style="font-family:${font}">${foot}</div></div></div>`;
+  }
+  if(tpl==="5"){
+    const lh=links.map(l=>`<a class="tpl5-link" href="${esc(l.url)}" target="_blank" rel="noopener" style="font-family:${font}">${esc(l.label)}</a>`).join("");
+    return `<div class="tpl5-wrap" style="background:linear-gradient(135deg,${br.c1} 0%,${br.c3} 100%)"><div class="tpl5-card">${logoEl("tpl5-logo",80,20)}<div class="tpl5-name" style="font-family:${font}">${esc(name)}</div>${bio?`<div class="tpl5-bio" style="font-family:${font}">${esc(bio)}</div>`:""}<div class="tpl5-links">${lh}</div><div class="tpl5-footer" style="font-family:${font}">${foot}</div></div></div>`;
+  }
+  return "";
+}
+
+// ── MODALS ──
 function openModal(id){ document.getElementById(id).classList.add("open"); }
 function closeModal(id){ document.getElementById(id).classList.remove("open"); }
-document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{ if(e.target===o)o.classList.remove("open"); }));
+document.querySelectorAll(".overlay").forEach(o=>o.addEventListener("click",e=>{if(e.target===o)o.classList.remove("open");}));
 
-// ══════════════════════════════════════════
-// EXPOSE GLOBALS (necesario para onclick en HTML)
-// ══════════════════════════════════════════
-Object.assign(window, {
-  doLogin, logout, showLogin,
-  openNew, openEdit, saveClient, delClient,
-  openBrand, onLogoFile, clearLogo, prevBrand, saveBrand,
-  setTheme, addLink, upLink, rmLink, saveLinks,
-  openModal, closeModal,
-});
+// ── EXPOSE TO WINDOW (soluciona el problema de module scope) ──
+window.__setTheme   = setTheme;
+window.__renderPrev = renderPrev;
+window.__addLink    = addLink;
+window.__upLink     = upLink;
+window.__rmLink     = rmLink;
+window.__saveLinks  = saveLinks;
+window.__goBack     = goBack;
+window.__showLogin  = showLogin;
+window.__openEdit   = openEdit;
+window.__openBrand  = openBrand;
+window.__openNew    = openNew;
+window.__saveClient = saveClient;
+window.__delClient  = delClient;
+window.__saveBrand  = saveBrand;
+window.__pickTpl    = pickTpl;
+window.__onLogoFile = onLogoFile;
+window.__clearLogo  = clearLogo;
+window.__prevBrand  = prevBrand;
+window.__closeModal = closeModal;
 
-// ══════════════════════════════════════════
-// BOOT
-// ══════════════════════════════════════════
-window.addEventListener("hashchange", route);
+// también exponer las que se llaman desde el HTML del grid (generado dinámicamente)
+window.doLogin  = doLogin;
+window.logout   = logout;
+window.openNew  = openNew;
+
 route();
 </script>
 </body>
